@@ -1,0 +1,14 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="UI" type="Application" factoryName="Application">
+    <option name="ALTERNATIVE_JRE_PATH" value="BUNDLED" />
+    <envs>
+      <env name="PATH_TO_FX" value="&quot;lib&quot;" />
+    </envs>
+    <option name="MAIN_CLASS_NAME" value="CatERingApp" />
+    <module name="CatERingSpace" />
+    <option name="VM_PARAMETERS" value="--module-path $PATH_TO_FX$ --add-modules javafx.controls,javafx.fxml --add-exports javafx.graphics/com.sun.javafx.sg.prism=ALL-UNNAMED" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

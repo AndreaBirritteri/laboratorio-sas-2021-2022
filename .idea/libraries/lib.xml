@@ -1,0 +1,16 @@
+<component name="libraryTable">
+  <library name="lib">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/commons-lang3-3.9.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/commons-text-1.8.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/javafx-base-18.0.1-mac-aarch64.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/javafx-controls-18.0.1-mac-aarch64.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/javafx-fxml-18.0.1-mac-aarch64.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/javafx-graphics-18.0.1-mac-aarch64.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/mysql-connector-java-8.0.25.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/protobuf-java-3.11.4.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
