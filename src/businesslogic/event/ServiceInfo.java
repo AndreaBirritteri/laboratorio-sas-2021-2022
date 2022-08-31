@@ -1,5 +1,6 @@
 package businesslogic.event;
 
+import businesslogic.menu.Menu;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import persistence.PersistenceManager;
@@ -17,6 +18,7 @@ public class ServiceInfo implements EventItemInfo {
     private Time timeStart;
     private Time timeEnd;
     private int participants;
+    private Menu menu;
 
     public ServiceInfo(String name) {
         this.name = name;
@@ -25,6 +27,10 @@ public class ServiceInfo implements EventItemInfo {
 
     public String toString() {
         return name + ": " + date + " (" + timeStart + "-" + timeEnd + "), " + participants + " pp.";
+    }
+
+    public Menu getMenu() {
+        return menu;
     }
 
     // STATIC METHODS FOR PERSISTENCE
@@ -43,6 +49,7 @@ public class ServiceInfo implements EventItemInfo {
                 serv.timeStart = rs.getTime("time_start");
                 serv.timeEnd = rs.getTime("time_end");
                 serv.participants = rs.getInt("expected_participants");
+                serv.menu = Menu.getMenuById(rs.getInt("menu_id"));
                 result.add(serv);
             }
         });
