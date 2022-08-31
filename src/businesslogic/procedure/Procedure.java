@@ -19,6 +19,7 @@ public abstract class Procedure {
     private String notes;
     private String author;
     private boolean published;
+    private int time;
 
 
     public Procedure() {
@@ -113,6 +114,29 @@ public abstract class Procedure {
 
     public void removeAssignedTask(KitchenTask task) {
         this.assignedInTasks.remove(task);
+    }
+
+
+    public void setName(String name) {
+        //this.name = name;
+    }
+
+    public void deleteRecipe(){
+        //all.remove(this);
+    }
+
+    public void editRecipe(){
+        //all.remove(this);
+    }
+
+
+    public void copyProcedure() {
+        //all.remove(this);
+    }
+
+
+    public void unpublishProcedure(Procedure procedure) {
+
     }
 
 }
