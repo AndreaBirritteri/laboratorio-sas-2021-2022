@@ -6,6 +6,8 @@ import java.util.List;
 public class GroupedSteps {
 
     private ArrayList<String> steps;
+    private String repetionRule;
+    private boolean inAdvance;
 
     public GroupedSteps() {
         this.steps = new ArrayList<>();
