@@ -22,25 +22,28 @@ public class KitchenSheet {
         this.service = service;
         this.kitchenTasks = new ArrayList<>();
 
+        restoreOriginalTasks();
+    }
+
+    public KitchenTask addKitchenTask(Procedure procedure) {
+        KitchenTask kitchenTask = new KitchenTask(procedure);
+        kitchenTasks.add(kitchenTask);
+        return kitchenTask;
+    }
+
+    public void deleteKitchenTask(KitchenTask kitchenTask) {
+        kitchenTasks.remove(kitchenTask);
+    }
+
+    public void restoreOriginalTasks() {
         Menu menu = service.getMenu();
         ArrayList<Recipe> recipes = menu.getRecipes();
         List<Procedure> procedures = Procedure.retrieveProceduresToPrepare(recipes);
 
-        for (Procedure procedure : procedures) {
-            //kitchenTasks.add(task);
+        for (Procedure proc : procedures) {
+            KitchenTask task = new KitchenTask(proc);
+            kitchenTasks.add(task);
         }
-    }
-
-    public KitchenTask addKitchenTask(Procedure procedure) {
-        throw new NotImplementedException("not implemented");
-    }
-
-    public void deleteKitchenTask(KitchenTask kitchenTask) {
-        throw new NotImplementedException("not implemented");
-    }
-
-    public void restoreOriginalTasks() {
-        throw new NotImplementedException("not implemented");
     }
 
     public void moveTask(KitchenTask kitchenTask, int position) {
