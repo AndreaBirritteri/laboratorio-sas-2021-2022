@@ -10,16 +10,18 @@ public class KitchenTask {
     private int quantity;
     private boolean isCompleted;
 
-    KitchenTask create(Procedure procedure){
+    KitchenTask create(Procedure procedure) {
         throw new NotImplementedException("create(Procedure procedure) not implemented");
     }
 
-    void assign(Shift shift, Cook cook, int minutes, int quantity){
+    void assign(Shift shift, Cook cook, int minutes, int quantity) {
         throw new NotImplementedException("assign(Shift shift, Cook cook, int minutes, int quantity) not implemented");
     }
 
-    void setCompleted(boolean isCompleted){
+    void setCompleted(boolean isCompleted) {
         this.isCompleted = isCompleted;
     }
+
+
 
 }
