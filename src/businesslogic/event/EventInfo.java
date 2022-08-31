@@ -9,10 +9,11 @@ import persistence.ResultHandler;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class EventInfo implements EventItemInfo {
     private int id;
-    private String name;
+    private final String name;
     private Date dateStart;
     private Date dateEnd;
     private int participants;
@@ -31,6 +32,14 @@ public class EventInfo implements EventItemInfo {
 
     public String toString() {
         return name + ": " + dateStart + "-" + dateEnd + ", " + participants + " pp. (" + organizer.getUserName() + ")";
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getId() {
+        return id;
     }
 
     // STATIC METHODS FOR PERSISTENCE
@@ -57,5 +66,20 @@ public class EventInfo implements EventItemInfo {
             e.services = ServiceInfo.loadServiceInfoForEvent(e.id);
         }
         return all;
+    }
+
+    public static EventInfo getEventByName(String name) throws Exception {
+        ArrayList<EventInfo> events = new ArrayList<>(loadAllEventInfo().stream().toList()) ;
+
+        for (EventInfo event : events) {
+            if(event.name.equals(name))
+                return event;
+        }
+        throw new Exception("Evento non trovato");
+    }
+
+    public ServiceInfo getFirstService(){
+        loadAllEventInfo();
+        return services.get(0);
     }
 }

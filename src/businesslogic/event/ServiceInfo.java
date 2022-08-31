@@ -33,11 +33,17 @@ public class ServiceInfo implements EventItemInfo {
         return menu;
     }
 
-    // STATIC METHODS FOR PERSISTENCE
+    public String getName() {
+        return name;
+    }
+
+    public int getId() {
+        return id;
+    }
 
     public static ObservableList<ServiceInfo> loadServiceInfoForEvent(int event_id) {
         ObservableList<ServiceInfo> result = FXCollections.observableArrayList();
-        String query = "SELECT id, name, service_date, time_start, time_end, expected_participants " +
+        String query = "SELECT id, name, service_date, time_start, time_end, expected_participants, proposed_menu_id " +
                 "FROM Services WHERE event_id = " + event_id;
         PersistenceManager.executeQuery(query, new ResultHandler() {
             @Override
@@ -49,7 +55,7 @@ public class ServiceInfo implements EventItemInfo {
                 serv.timeStart = rs.getTime("time_start");
                 serv.timeEnd = rs.getTime("time_end");
                 serv.participants = rs.getInt("expected_participants");
-                serv.menu = Menu.getMenuById(rs.getInt("menu_id"));
+                serv.menu = Menu.getMenuById(rs.getInt("proposed_menu_id"));
                 result.add(serv);
             }
         });

@@ -1,5 +1,6 @@
 package businesslogic.kitchentask;
 
+import businesslogic.BusinessLogicException;
 import businesslogic.event.ServiceInfo;
 import businesslogic.menu.Menu;
 import businesslogic.procedure.Procedure;
@@ -7,15 +8,17 @@ import businesslogic.procedure.Recipe;
 import businesslogic.shift.Shift;
 import businesslogic.user.Cook;
 import org.apache.commons.lang3.NotImplementedException;
+import persistence.PersistenceManager;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class KitchenSheet {
     private String title;
+    private int id;
     private ServiceInfo service;
     private List<KitchenTask> kitchenTasks;
-
 
     public KitchenSheet(String title, ServiceInfo service) {
         this.title = title;
@@ -29,6 +32,34 @@ public class KitchenSheet {
         KitchenTask kitchenTask = new KitchenTask(procedure);
         kitchenTasks.add(kitchenTask);
         return kitchenTask;
+    }
+
+    public List<KitchenTask> getKitchenTasks() {
+        return kitchenTasks;
+    }
+
+    public static int getIdFromTitleAndServiceId(String title, int serviceId) {
+        AtomicInteger res = new AtomicInteger(-1);
+        String query = "SELECT id FROM catering.KitchenSheets WHERE title = '" + title + "' and service_id = " + serviceId;
+        PersistenceManager.executeQuery(query, rs -> {
+            res.set(rs.getInt("id"));
+        });
+        return res.get();
+    }
+
+    static public KitchenSheet loadSheetInfoByTitle(String title, ServiceInfo service) throws BusinessLogicException {
+        int idFromTitle = getIdFromTitleAndServiceId(title, service.getId());
+        if(idFromTitle < 0) {
+            throw new BusinessLogicException("Il foglio \""+ title+ "\" non è stato trovato");
+        }
+        KitchenSheet sheet = new KitchenSheet(title, service);
+        sheet.id = idFromTitle;
+        sheet.kitchenTasks = KitchenTask.loadTasksFor(sheet.id);
+        return sheet;
+    }
+
+    public String getTitle() {
+        return title;
     }
 
     public void deleteKitchenTask(KitchenTask kitchenTask) {
@@ -47,11 +78,11 @@ public class KitchenSheet {
     }
 
     public void moveTask(KitchenTask kitchenTask, int position) {
-        throw new NotImplementedException("not implemented");
+        kitchenTasks.set(position, kitchenTask);
     }
 
-    public void assignTask(KitchenTask kitchenTask, Shift shift, Cook cook, int minutes, int quantity) {
-        throw new NotImplementedException("not implemented");
+    public void assignTask(KitchenTask kitchenTask, Shift shift, Cook cook, int minutes, int quantity) throws Exception {
+        kitchenTasks.get(kitchenTasks.indexOf(kitchenTask)).assign(shift, cook, minutes, quantity);
     }
 
     public void specifyCompletedTask(KitchenTask kitchenTask) {

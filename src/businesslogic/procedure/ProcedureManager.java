@@ -1,7 +1,5 @@
 package businesslogic.procedure;
 
-import businesslogic.kitchentask.KitchenTaskReceiver;
-import businesslogic.menu.Menu;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 

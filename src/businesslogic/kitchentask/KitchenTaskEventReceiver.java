@@ -2,7 +2,7 @@ package businesslogic.kitchentask;
 
 import businesslogic.shift.Shift;
 
-public interface KitchenTaskReceiver {
+public interface KitchenTaskEventReceiver {
     public void updateSheetCreated(KitchenSheet sheet);
 
     public void updateTaskAdded(KitchenSheet sheet, KitchenTask task);
@@ -17,5 +17,5 @@ public interface KitchenTaskReceiver {
 
     public void updateTaskCompleted(KitchenSheet sheet, KitchenTask task);
 
-    public void updateTurnCompletenessChanged(Shift shift, boolean isComplete);
+    public void updateShiftCompletenessChanged(Shift shift, boolean isComplete);
 }

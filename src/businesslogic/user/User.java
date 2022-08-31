@@ -1,15 +1,13 @@
 package businesslogic.user;
 
+import businesslogic.shift.Shift;
 import javafx.collections.FXCollections;
 import persistence.PersistenceManager;
 import persistence.ResultHandler;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class User {
 
@@ -20,15 +18,26 @@ public class User {
     private int id;
     private String username;
     private Set<Role> roles;
+    private ArrayList<Shift> availableForShifts;
 
     public User() {
         id = 0;
         username = "";
         this.roles = new HashSet<>();
+        availableForShifts = new ArrayList<>();
     }
 
     public boolean isChef() {
         return roles.contains(Role.CHEF);
+    }
+
+
+    public void addAvailabilityFor(Shift shift) {
+        availableForShifts.add(shift);
+    }
+
+    public boolean isAvailableFor(Shift shift){
+        return availableForShifts.contains(shift);
     }
 
     public String getUserName() {
