@@ -43,4 +43,29 @@ public class KitchenTaskManager {
     public void notifyTurnCompletenessChanged(Shift shift, boolean isCompleted) {
 
     }
+
+    createKitchenSheet(title:String, event:Event, service:Service) :KitchenSheet
+
+    setCurrentSheet(sheet:KitchenSheet)
+
+    chooseKitchenSheet(sheet:KitchenSheet, event:Event, service:Service) :KitchenSheet +
+
+    addKitchenTask(procedure:Procedure) :KitchenTask
++
+
+    deleteKitchenTask(task:KitchenTask)
++
+
+    restoreOriginalTasks()
++
+
+    moveTask(task:KitchenTask, position:int)
++
+
+    assignTask(task:KitchenTask, turn?:Turn, cook?:Cook, timing?:String, quantity?:String) +
+
+    specifyCompletedTask(task:KitchenTask)
++
+
+    specifyTurnCompleteness(turn:Turn, isComplete:boolean)
 }
