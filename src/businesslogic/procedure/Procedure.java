@@ -7,13 +7,26 @@ import java.util.List;
 
 public abstract class Procedure {
     private int id;
-    private List <KitchenTask> assignedInTasks; //fixme: non utilizzato in questo caso d'uso ma necessario per un controllo nell'UC delle ricette (eliminazione procedura)
-    private List <Ingredient> ingredients;
+    private List<KitchenTask> assignedInTasks; //fixme: non utilizzato in questo caso d'uso ma necessario per un controllo nell'UC delle ricette (eliminazione procedura)
+    private List<Ingredient> ingredients;
+    private List <GroupedSteps> Steps;
+
+    private List <String> tags;
+
+
+    private String title;
+    private String quantity;
+    private String notes;
+    private String author;
+    private boolean published;
+
 
     public Procedure() {
         id = 0;
         this.ingredients = new ArrayList<>();
         this.assignedInTasks = new ArrayList<>();
+        this.Steps = new ArrayList<>();
+
     }
 
     public int getId() {
@@ -32,9 +45,9 @@ public abstract class Procedure {
     public static List<Procedure> retrieveProceduresToPrepare(List<Recipe> recipesToExtract) {
         List<Procedure> procedures = new ArrayList<>();
 
-        for (Recipe recipe: recipesToExtract){
+        for (Recipe recipe : recipesToExtract) {
             Procedure newPrep = new Preparation();
-            for(Ingredient ingredient: recipe.getIngredients()){
+            for (Ingredient ingredient : recipe.getIngredients()) {
                 newPrep.addIngredient(ingredient);
                 procedures.add(newPrep);
             }
@@ -44,14 +57,61 @@ public abstract class Procedure {
     }
 
 
+    public void defineSection(String name) {
+
+    }
+
+    public void deleteSection(String name) {
+
+    }
 
 
+    public void editNameSection(String name) {
 
-    public void addAssignedTask(KitchenTask task){
+    }
+
+
+    public void newSimpleStep() {
+
+    }
+
+
+    public void editStep() {
+
+    }
+
+    public void deleteStep() {
+
+    }
+
+
+    public void addIngredient() {
+
+    }
+
+    public void deleteIngredient() {
+
+    }
+
+
+    public void addDetails() {
+
+    }
+
+    public void addInfo() {
+
+    }
+
+    public void publish() {
+
+    }
+
+
+    public void addAssignedTask(KitchenTask task) {
         this.assignedInTasks.add(task);
     }
 
-    public void removeAssignedTask(KitchenTask task){
+    public void removeAssignedTask(KitchenTask task) {
         this.assignedInTasks.remove(task);
     }
 

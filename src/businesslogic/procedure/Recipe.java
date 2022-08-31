@@ -11,17 +11,20 @@ import java.util.*;
 
 public class Recipe extends Procedure{
     private static Map<Integer, Recipe> all = new HashMap<>();
+    private List <String> Steps;
+
 
     private int id;
     private String name;
 
-    private Recipe() {
+    public Recipe() {
 
     }
 
     public Recipe(String name) {
         id = 0;
         this.name = name;
+        all.put(id,this);
     }
 
     public String getName() {
@@ -82,6 +85,36 @@ public class Recipe extends Procedure{
         });
         return rec;
     }
+
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void deleteRecipe(){
+        all.remove(this);
+    }
+
+    public void editRecipe(){
+        all.remove(this);
+    }
+
+
+    public void copyProcedure() {
+        all.remove(this);
+    }
+
+
+    public void unpublishProcedure(Procedure procedure) {
+
+    }
+
+
+
+
+
+
+
 
 
 }

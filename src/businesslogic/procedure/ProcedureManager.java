@@ -12,23 +12,25 @@ public class ProcedureManager {
     }
 
 
-    private Procedure currentRecipe;
+    private Recipe currentRecipe;
 
 
     public void addRecipe(String title) {
 
+            currentRecipe = new Recipe();
+
     }
 
     public void addProcedure(String title) {
-
+        currentRecipe = new Recipe();
     }
 
     public void deleteProcedure(Procedure procedure) {
-
+        currentRecipe.deleteRecipe();
     }
 
     public void editProcedure(Procedure procedure) {
-
+            currentRecipe.editRecipe();
     }
 
     public void copyProcedure(Procedure procedure) {
