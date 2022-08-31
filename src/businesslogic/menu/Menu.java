@@ -33,6 +33,7 @@ public class Menu {
         this.featuresMap = FXCollections.observableHashMap();
     }
 
+
     public Menu(User user, String title, String[] menuFeatures) {
         id = 0;
 
@@ -61,20 +62,43 @@ public class Menu {
         this.inUse = false;
         this.owner = owner;
         this.featuresMap = FXCollections.observableHashMap();
-        for (String feat: m.featuresMap.keySet()) {
+        for (String feat : m.featuresMap.keySet()) {
             this.featuresMap.put(feat, m.featuresMap.get(feat));
         }
 
         this.sections = FXCollections.observableArrayList();
-        for (Section original: m.sections) {
+        for (Section original : m.sections) {
             this.sections.add(new Section(original));
         }
 
         this.freeItems = FXCollections.observableArrayList();
-        for (MenuItem original: m.freeItems) {
+        for (MenuItem original : m.freeItems) {
             this.freeItems.add(new MenuItem(original));
         }
 
+    }
+
+    public ArrayList<Recipe> getRecipes(){
+
+        ArrayList<MenuItem> items = new ArrayList<>(freeItems);
+        for(Section section: sections){
+            items.addAll(section.getItems());
+        }
+
+        ArrayList<Recipe> recipes = new ArrayList<>();
+        for(MenuItem item: items){
+            recipes.add(item.getItemRecipe());
+        }
+
+        return recipes;
+    }
+
+    public static Menu getMenuById(int id) {
+        for (Menu menu : loadAllMenus()) {
+            if (menu.id == id)
+                return menu;
+        }
+        return null;
     }
 
     public static void savefreeItemDeleted(Menu m, MenuItem mi) {
@@ -478,7 +502,7 @@ public class Menu {
             // find if "in use"
             String inuseQ = "SELECT * FROM Services WHERE approved_menu_id = " + m.id +
                     " OR " +
-                    "proposed_menu_id = "+ m.id;
+                    "proposed_menu_id = " + m.id;
             PersistenceManager.executeQuery(inuseQ, new ResultHandler() {
                 @Override
                 public void handle(ResultSet rs) throws SQLException {
@@ -487,7 +511,7 @@ public class Menu {
                 }
             });
         }
-        for (Menu m: newMenus) {
+        for (Menu m : newMenus) {
             loadedMenus.put(m.id, m);
         }
         return FXCollections.observableArrayList(loadedMenus.values());
