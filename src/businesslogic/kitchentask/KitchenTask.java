@@ -66,15 +66,15 @@ public class KitchenTask {
 
     public static List<KitchenTask> loadTasksFor(int sheetId) {
         List<KitchenTask> result = new ArrayList<>();
-        String query = "SELECT * FROM kitchentasks WHERE kitchensheet_id = " + sheetId +
-                " ORDER BY position";
+        String query = "SELECT * FROM KitchenTasks WHERE id = " + sheetId +
+                " ORDER BY priority";
         PersistenceManager.executeQuery(query, new ResultHandler() {
             @Override
             public void handle(ResultSet rs) throws SQLException {
                 Procedure procedure = Recipe.loadRecipeById(rs.getInt("procedures_id"));
                 KitchenTask task = new KitchenTask(procedure);
                 task.id = rs.getInt("id");
-                task.minutes = rs.getInt("timing");
+                task.minutes = rs.getInt("minutes");
                 task.quantity = rs.getInt("quantity");
                 task.isCompleted = rs.getInt("completed") != 0;
                 task.shift = new Shift(rs.getString("shift_when"));

@@ -12,14 +12,21 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class EventInfo implements EventItemInfo {
-    private int id;
     private final String name;
+    private int id;
     private Date dateStart;
     private Date dateEnd;
     private int participants;
     private User organizer;
 
     private ObservableList<ServiceInfo> services;
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj instanceof EventInfo)
+            return this.id == ((EventInfo) obj).id;
+        return super.equals(obj);
+    }
 
     public EventInfo(String name) {
         this.name = name;
@@ -42,7 +49,26 @@ public class EventInfo implements EventItemInfo {
         return id;
     }
 
-    // STATIC METHODS FOR PERSISTENCE
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setDateStart(Date dateStart) {
+        this.dateStart = dateStart;
+    }
+
+    public void setDateEnd(Date dateEnd) {
+        this.dateEnd = dateEnd;
+    }
+
+    public void setParticipants(int participants) {
+        this.participants = participants;
+    }
+
+    public void setOrganizer(User organizer) {
+        this.organizer = organizer;
+    }
+// STATIC METHODS FOR PERSISTENCE
 
     public static ObservableList<EventInfo> loadAllEventInfo() {
         ObservableList<EventInfo> all = FXCollections.observableArrayList();

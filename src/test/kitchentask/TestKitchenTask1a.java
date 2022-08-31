@@ -1,5 +1,6 @@
 package test.kitchentask;
 
+import businesslogic.BusinessLogicException;
 import businesslogic.CatERing;
 import businesslogic.UseCaseLogicException;
 import businesslogic.event.EventInfo;
@@ -29,8 +30,7 @@ public class TestKitchenTask1a {
 
 
             System.out.println("\nTEST OPEN EXISTING SHEET");
-            KitchenSheet sheetToOpen = new KitchenSheet("Primo foglio di prova", service);
-            //KitchenSheet sheetToOpen = new KitchenSheet("Pranzo di natale coi parenti", service); //foglio non presente nel db, lancerà un'eccezione
+            KitchenSheet sheetToOpen = new KitchenSheet("Convegno Agile Community", service);
             KitchenSheet sheet = catERing.getKitchenTaskManager().chooseKitchenSheet(sheetToOpen, event, service);
             System.out.println("Foglio esistente per servizio \"" + service.getName() + "\" associato all'evento \"" + event.getName() + "\": " + sheet);
 
@@ -69,6 +69,8 @@ public class TestKitchenTask1a {
             System.out.println("Foglio con primo task completato: " + sheet);
 
         } catch (Exception e) {
+            throw new RuntimeException(e);
+        } catch (BusinessLogicException e) {
             throw new RuntimeException(e);
         }
     }
