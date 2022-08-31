@@ -76,8 +76,12 @@ public class KitchenTaskManager {
         throw new NotImplementedException("not implemented");
     }
 
-    public void setCurrentSheet(KitchenSheet sheet) {
-        throw new NotImplementedException("not implemented");
+    public void setCurrentKitchenSheet(KitchenSheet sheet) throws UseCaseLogicException {
+        if (sheet != null) {
+            this.currentKitchenSheet = sheet;
+        } else {
+            throw new UseCaseLogicException();
+        }
     }
 
     public KitchenSheet chooseKitchenSheet(KitchenSheet sheet, EventInfo event, ServiceInfo service)
@@ -90,17 +94,25 @@ public class KitchenTaskManager {
             throw new UseCaseLogicException();
         }
         KitchenSheet currentSheet = KitchenSheet.loadSheetInfoByTitle(sheet.getTitle(), service);
-        this.setCurrentSheet(currentSheet);
-
+        this.setCurrentKitchenSheet(currentSheet);
         return currentSheet;
     }
 
-    public KitchenTask addKitchenTask(Procedure procedure) {
-        throw new NotImplementedException("not implemented");
+    public KitchenTask addKitchenTask(Procedure procedure) throws UseCaseLogicException {
+        if (currentKitchenSheet != null) {
+            KitchenTask kitchenTask = this.currentKitchenSheet.addKitchenTask(procedure);
+            this.notifyTaskAdded(currentKitchenSheet, kitchenTask);
+            return kitchenTask;
+        }
+        throw new UseCaseLogicException();
     }
 
-    public void deleteKitchenTask(KitchenTask task) {
-        throw new NotImplementedException("not implemented");
+    public void deleteKitchenTask(KitchenTask task) throws UseCaseLogicException {
+        if (currentKitchenSheet != null && currentKitchenSheet.getKitchenTasks().contains(task)) {
+            currentKitchenSheet.deleteKitchenTask(task);
+            this.notifyTaskDeleted(task);
+        }
+        throw new UseCaseLogicException();
     }
 
     public void restoreOriginalTasks() {

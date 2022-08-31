@@ -28,6 +28,16 @@ public class KitchenSheet {
         restoreOriginalTasks();
     }
 
+    @Override
+    public String toString() {
+        return "KitchenSheet{" +
+                "title='" + title + '\'' +
+                ", id=" + id +
+                ", service=" + service +
+                ", kitchenTasks=" + kitchenTasks +
+                '}';
+    }
+
     public KitchenTask addKitchenTask(Procedure procedure) {
         KitchenTask kitchenTask = new KitchenTask(procedure);
         kitchenTasks.add(kitchenTask);

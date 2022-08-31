@@ -26,6 +26,19 @@ public class KitchenTask {
         this.procedure = procedure;
     }
 
+    @Override
+    public String toString() {
+        return "KitchenTask{" +
+                "procedure=" + procedure +
+                ", shift=" + shift +
+                ", cook=" + cook +
+                ", minutes=" + minutes +
+                ", quantity=" + quantity +
+                ", isCompleted=" + isCompleted +
+                ", id=" + id +
+                '}';
+    }
+
     void assign(Shift shift, Cook cook, int minutes, int quantity) throws Exception {
         if(!cook.isAvailableFor(shift))
             throw new Exception("Not available");
