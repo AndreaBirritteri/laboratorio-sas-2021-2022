@@ -1,6 +1,7 @@
 package businesslogic.procedure;
 
 import businesslogic.kitchentask.KitchenTaskReceiver;
+import businesslogic.menu.Menu;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -9,6 +10,9 @@ public class ProcedureManager {
     public ProcedureManager() {
         Recipe.loadAllRecipes();
     }
+
+
+    private Procedure currentRecipe;
 
 
     public void addRecipe(String title) {

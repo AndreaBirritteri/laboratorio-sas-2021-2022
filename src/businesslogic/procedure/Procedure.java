@@ -43,6 +43,10 @@ public abstract class Procedure {
         return procedures;
     }
 
+
+
+
+
     public void addAssignedTask(KitchenTask task){
         this.assignedInTasks.add(task);
     }
