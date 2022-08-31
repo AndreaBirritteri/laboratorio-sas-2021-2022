@@ -1,71 +1,91 @@
 package businesslogic.kitchentask;
 
+import businesslogic.event.EventInfo;
+import businesslogic.event.ServiceInfo;
+import businesslogic.procedure.Procedure;
 import businesslogic.shift.Shift;
+import businesslogic.user.Cook;
+import org.apache.commons.lang3.NotImplementedException;
 
 public class KitchenTaskManager {
 
     public void addReceiver(KitchenTaskReceiver kitchenTaskReceiver) {
-
+        throw new NotImplementedException("not implemented");
     }
 
     public void removeReceiver(KitchenTaskReceiver kitchenTaskReceiver) {
-
+        throw new NotImplementedException("not implemented");
     }
 
     public void notifySheetCreated(KitchenSheet sheet) {
-
+        throw new NotImplementedException("not implemented");
     }
 
     public void notifyTaskAdded(KitchenSheet sheet, KitchenTask task) {
-
+        throw new NotImplementedException("not implemented");
     }
 
     public void notifyTaskDeleted(KitchenTask task) {
-
+        throw new NotImplementedException("not implemented");
     }
 
     public void notifySheetRestored(KitchenSheet sheet) {
-
+        throw new NotImplementedException("not implemented");
     }
 
     public void notifyTasksRearranged(KitchenSheet sheet) {
-
+        throw new NotImplementedException("not implemented");
     }
 
     public void notifyTaskAssigned(KitchenSheet sheet, KitchenTask task) {
-
+        throw new NotImplementedException("not implemented");
     }
 
     public void notifyTaskCompleted(KitchenSheet sheet, KitchenTask task) {
-
+        throw new NotImplementedException("not implemented");
     }
 
     public void notifyTurnCompletenessChanged(Shift shift, boolean isCompleted) {
-
+        throw new NotImplementedException("not implemented");
     }
 
-    createKitchenSheet(title:String, event:Event, service:Service) :KitchenSheet
+    public KitchenSheet createKitchenSheet(String title, EventInfo event, ServiceInfo service) {
+        throw new NotImplementedException("not implemented");
+    }
 
-    setCurrentSheet(sheet:KitchenSheet)
+    public void setCurrentSheet(KitchenSheet sheet) {
+        throw new NotImplementedException("not implemented");
+    }
 
-    chooseKitchenSheet(sheet:KitchenSheet, event:Event, service:Service) :KitchenSheet +
+    public KitchenSheet chooseKitchenSheet(KitchenSheet sheet, EventInfo event, ServiceInfo service) {
+        throw new NotImplementedException("not implemented");
+    }
 
-    addKitchenTask(procedure:Procedure) :KitchenTask
-+
+    public KitchenSheet addKitchenTask(Procedure procedure) {
+        throw new NotImplementedException("not implemented");
+    }
 
-    deleteKitchenTask(task:KitchenTask)
-+
+    public void deleteKitchenTask(KitchenTask task) {
+        throw new NotImplementedException("not implemented");
+    }
 
-    restoreOriginalTasks()
-+
+    public void restoreOriginalTasks() {
+        throw new NotImplementedException("not implemented");
+    }
 
-    moveTask(task:KitchenTask, position:int)
-+
+    public void moveTask(KitchenTask task, int position) {
+        throw new NotImplementedException("not implemented");
+    }
 
-    assignTask(task:KitchenTask, turn?:Turn, cook?:Cook, timing?:String, quantity?:String) +
+    public void assignTask(KitchenTask task, Shift shift, Cook cook, int minutes, int quantity) {
+        throw new NotImplementedException("not implemented");
+    }
 
-    specifyCompletedTask(task:KitchenTask)
-+
+    public void specifyCompletedTask(KitchenTask task) {
+        throw new NotImplementedException("not implemented");
+    }
 
-    specifyTurnCompleteness(turn:Turn, isComplete:boolean)
+    public void specifyTurnCompleteness(Shift shift, boolean isComplete) {
+        throw new NotImplementedException("not implemented");
+    }
 }
