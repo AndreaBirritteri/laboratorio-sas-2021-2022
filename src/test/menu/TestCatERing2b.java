@@ -2,7 +2,7 @@ import businesslogic.CatERing;
 import businesslogic.UseCaseLogicException;
 import businesslogic.menu.Menu;
 import businesslogic.menu.Section;
-import businesslogic.procedure.Recipe;
+import businesslogic.preparation.Recipe;
 import javafx.collections.ObservableList;
 
 public class TestCatERing2b {

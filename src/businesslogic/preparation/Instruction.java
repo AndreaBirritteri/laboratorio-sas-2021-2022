@@ -1,4 +1,4 @@
-package businesslogic.procedure;
+package businesslogic.preparation;
 
 import businesslogic.kitchentask.KitchenTask;
 import javafx.collections.FXCollections;

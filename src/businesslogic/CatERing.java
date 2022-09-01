@@ -3,7 +3,7 @@ package businesslogic;
 import businesslogic.event.EventManager;
 import businesslogic.kitchentask.KitchenTaskManager;
 import businesslogic.menu.MenuManager;
-import businesslogic.procedure.InstructionManager;
+import businesslogic.preparation.InstructionManager;
 import businesslogic.shift.ShiftManager;
 import businesslogic.user.UserManager;
 import persistence.KitchenTaskEventPersistence;

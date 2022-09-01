@@ -7,7 +7,7 @@ import businesslogic.event.EventInfo;
 import businesslogic.event.ServiceInfo;
 import businesslogic.kitchentask.KitchenSheet;
 import businesslogic.kitchentask.KitchenTask;
-import businesslogic.procedure.Instruction;
+import businesslogic.preparation.Instruction;
 import javafx.collections.ObservableList;
 
 public class TestKitchenTask2b {

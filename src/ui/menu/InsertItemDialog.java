@@ -1,7 +1,7 @@
 package ui.menu;
 
 import businesslogic.CatERing;
-import businesslogic.procedure.Recipe;
+import businesslogic.preparation.Recipe;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;

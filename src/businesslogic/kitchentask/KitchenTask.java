@@ -1,8 +1,8 @@
 package businesslogic.kitchentask;
 
 import businesslogic.UseCaseLogicException;
-import businesslogic.procedure.Instruction;
-import businesslogic.procedure.Recipe;
+import businesslogic.preparation.Instruction;
+import businesslogic.preparation.Recipe;
 import businesslogic.shift.Shift;
 import businesslogic.user.User;
 import persistence.PersistenceManager;
@@ -11,7 +11,6 @@ import persistence.ResultHandler;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class KitchenTask {
     private final Instruction instruction;
@@ -20,7 +19,7 @@ public class KitchenTask {
     private int minutes;
     private int quantity;
     private boolean isCompleted;
-    private int id;
+    int id;
 
     KitchenTask(Instruction instruction) {
         this.instruction = instruction;
@@ -57,7 +56,7 @@ public class KitchenTask {
         return isCompleted;
     }
 
-    public Instruction getProcedure() {
+    public Instruction getInstruction() {
         return instruction;
     }
 
@@ -77,10 +76,10 @@ public class KitchenTask {
         return quantity;
     }
 
-    public static List<KitchenTask> loadTasksFor(int sheetId) {
-        List<KitchenTask> result = new ArrayList<>();
+    public static ArrayList<KitchenTask> loadTasksFor(int sheetId) {
+        ArrayList<KitchenTask> result = new ArrayList<>();
         String query = "SELECT * FROM KitchenTasks WHERE id = " + sheetId +
-                " ORDER BY priority";
+                " ORDER BY position";
         PersistenceManager.executeQuery(query, new ResultHandler() {
             @Override
             public void handle(ResultSet rs) throws SQLException {
@@ -99,14 +98,19 @@ public class KitchenTask {
     }
 
     public static void addTask(KitchenSheet sheet, KitchenTask taskToAdd, int posInKitchenSheet) {
-        String secInsert = "INSERT INTO catering.KitchenTasks (completed, kitchen_sheet_id, procedure_id, position) VALUES (" +
+        String query = "INSERT INTO catering.KitchenTasks (completed, kitchen_sheet_id, procedure_id, position) VALUES (" +
                 taskToAdd.isCompleted() + ", " +
                 sheet.getId() + ", " +
-                taskToAdd.getProcedure().getId() + ", " +
+                taskToAdd.getInstruction().getId() + ", " +
                 posInKitchenSheet +
                 ");";
-        PersistenceManager.executeUpdate(secInsert);
+        PersistenceManager.executeUpdate(query);
         taskToAdd.id = PersistenceManager.getLastId();
+    }
+
+    public static void deleteTask(KitchenTask task) {
+        String query = "DELETE FROM KitchenTasks WHERE id = " + task.id;
+        PersistenceManager.executeUpdate(query);
     }
 
 }

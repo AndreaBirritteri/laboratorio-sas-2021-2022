@@ -1,9 +1,8 @@
-package businesslogic.procedure;
+package businesslogic.preparation;
 
 import businesslogic.kitchentask.KitchenSheet;
 import businesslogic.kitchentask.KitchenTask;
 import businesslogic.kitchentask.KitchenTaskEventReceiver;
-import businesslogic.shift.Shift;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 

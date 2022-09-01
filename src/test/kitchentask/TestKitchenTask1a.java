@@ -2,15 +2,12 @@ package test.kitchentask;
 
 import businesslogic.BusinessLogicException;
 import businesslogic.CatERing;
-import businesslogic.UseCaseLogicException;
 import businesslogic.event.EventInfo;
 import businesslogic.event.ServiceInfo;
 import businesslogic.kitchentask.KitchenSheet;
 import businesslogic.kitchentask.KitchenTask;
-import businesslogic.procedure.Recipe;
+import businesslogic.preparation.Recipe;
 import businesslogic.shift.Shift;
-import businesslogic.user.Chef;
-import businesslogic.user.Cook;
 import businesslogic.user.User;
 
 public class TestKitchenTask1a {
@@ -50,7 +47,7 @@ public class TestKitchenTask1a {
             int firstPosition = 0;
             KitchenTask firstTask = sheet.getKitchenTasks().get(firstPosition);
             int newPosition = 2;
-            System.out.println("Spostiamo il " + firstPosition + " task \"" + firstTask.getProcedure() + "\" in posizione " + newPosition);
+            System.out.println("Spostiamo il " + firstPosition + " task \"" + firstTask + "\" in posizione " + newPosition);
             catERing.getKitchenTaskManager().moveTask(firstTask, newPosition);
             System.out.println("Foglio con task spostato: " + sheet);
 

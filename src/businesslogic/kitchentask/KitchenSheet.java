@@ -3,7 +3,7 @@ package businesslogic.kitchentask;
 import businesslogic.BusinessLogicException;
 import businesslogic.event.ServiceInfo;
 import businesslogic.menu.Menu;
-import businesslogic.procedure.Instruction;
+import businesslogic.preparation.Instruction;
 import businesslogic.shift.Shift;
 import businesslogic.user.Cook;
 import persistence.PersistenceManager;
@@ -17,7 +17,7 @@ public class KitchenSheet {
     private String title;
     private int id;
     private ServiceInfo service;
-    private List<KitchenTask> kitchenTasks;
+    private ArrayList<KitchenTask> kitchenTasks;
 
     public KitchenSheet(String title, ServiceInfo service) {
         this.title = title;
@@ -80,8 +80,8 @@ public class KitchenSheet {
 
     static public KitchenSheet loadSheetInfoByTitle(String title, ServiceInfo service) throws BusinessLogicException {
         int idFromTitle = getIdFromTitleAndServiceId(title, service.getId());
-        if(idFromTitle < 0) {
-            throw new BusinessLogicException("Il foglio \""+ title+ "\" non è stato trovato");
+        if (idFromTitle < 0) {
+            throw new BusinessLogicException("Il foglio \"" + title + "\" non è stato trovato");
         }
         KitchenSheet sheet = new KitchenSheet(title, service);
         sheet.id = idFromTitle;
@@ -122,5 +122,29 @@ public class KitchenSheet {
 
     public void setKitchenTaskAsCompleted(KitchenTask kitchenTask) {
         kitchenTasks.get(kitchenTasks.indexOf(kitchenTask)).setCompleted(true);
+    }
+
+    //Persistence
+    public static void saveNewSheet(KitchenSheet sheet) {
+        String sheetInsert = "INSERT INTO catering.KitchenSheets (title, service_id) VALUES (" +
+                "'" + PersistenceManager.escapeString(sheet.title) + "', " +
+                sheet.id +
+                ");";
+        PersistenceManager.executeUpdate(sheetInsert);
+        sheet.id = PersistenceManager.getLastId();
+
+        for (KitchenTask task : sheet.kitchenTasks)
+            KitchenTask.addTask(sheet, task, sheet.kitchenTasks.indexOf(task));
+    }
+
+    public static void addTask(KitchenSheet sheet, KitchenTask task, int position) {
+        String secInsert = "INSERT INTO catering.KitchenTasks (completed, kitchen_sheet_id, preparation_id, position) VALUES (" +
+                task.isCompleted() + ", " +
+                sheet.getId() + ", " +
+                task.getInstruction().getId() + ", " +
+                position +
+                ");";
+        PersistenceManager.executeUpdate(secInsert);
+        task.id = PersistenceManager.getLastId();
     }
 }

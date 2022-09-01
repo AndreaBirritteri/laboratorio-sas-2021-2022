@@ -2,8 +2,8 @@ package businesslogic.menu;
 
 import businesslogic.CatERing;
 import businesslogic.UseCaseLogicException;
-import businesslogic.procedure.Instruction;
-import businesslogic.procedure.Recipe;
+import businesslogic.preparation.Instruction;
+import businesslogic.preparation.Recipe;
 import businesslogic.user.User;
 import javafx.collections.ObservableList;
 

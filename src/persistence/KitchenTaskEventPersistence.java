@@ -9,17 +9,17 @@ import org.apache.commons.lang3.NotImplementedException;
 public class KitchenTaskEventPersistence implements KitchenTaskEventReceiver {
     @Override
     public void updateSheetCreated(KitchenSheet sheet) {
-        throw new NotImplementedException("Not implemented");
+        KitchenSheet.saveNewSheet(sheet);
     }
 
     @Override
     public void updateKitchenTaskAdded(KitchenSheet sheet, KitchenTask task) {
-        throw new NotImplementedException("Not implemented");
+        KitchenSheet.addTask(sheet, task, sheet.getKitchenTasks().indexOf(task));
     }
 
     @Override
     public void updateKitchenTaskDeleted(KitchenTask task) {
-        throw new NotImplementedException("Not implemented");
+        KitchenTask.deleteTask(task);
     }
 
     @Override

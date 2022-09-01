@@ -5,7 +5,7 @@ import businesslogic.CatERing;
 import businesslogic.UseCaseLogicException;
 import businesslogic.event.EventInfo;
 import businesslogic.event.ServiceInfo;
-import businesslogic.procedure.Instruction;
+import businesslogic.preparation.Instruction;
 import businesslogic.shift.Shift;
 import businesslogic.user.User;
 

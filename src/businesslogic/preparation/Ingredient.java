@@ -1,4 +1,4 @@
-package businesslogic.procedure;
+package businesslogic.preparation;
 
 public class Ingredient implements AbstractIngredient {
     private String quantity;
