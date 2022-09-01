@@ -27,7 +27,7 @@ public class TestKitchenTask2b {
             System.out.println("Foglio autogenerato per servizio \"" + service.getName() + "\" associato all'evento \"" + event.getName() + "\": " + sheet);
 
             System.out.println("\nTEST ADD KITCHEN TASK");
-            ObservableList<Instruction> recipes = CatERing.getInstance().getRecipeManager().getInstructions();
+            ObservableList<Instruction> recipes = CatERing.getInstance().getInstructionManager().getInstructions();
             KitchenTask preparePaniniLatte = catERing.getKitchenTaskManager().addKitchenTask(recipes.get(11));
             KitchenTask prepareBigneFarciti = catERing.getKitchenTaskManager().addKitchenTask(recipes.get(14));
             KitchenTask preparePizzette = catERing.getKitchenTaskManager().addKitchenTask(recipes.get(15));

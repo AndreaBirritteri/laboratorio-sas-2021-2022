@@ -171,6 +171,10 @@ public class InstructionManager {
     }
 
     public ObservableList<Instruction> getInstructions() {
+        return FXCollections.unmodifiableObservableList(Instruction.getAllInstruction());
+    }
+
+    public ObservableList<Recipe> getRecipes() {
         return FXCollections.unmodifiableObservableList(Recipe.getAllRecipes());
     }
 }

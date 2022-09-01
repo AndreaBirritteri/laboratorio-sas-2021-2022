@@ -1,5 +1,7 @@
 package businesslogic.procedure;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import persistence.PersistenceManager;
 import persistence.ResultHandler;
 
@@ -36,7 +38,15 @@ public class Recipe extends Instruction {
         return rec;
     }
 
+    public static ObservableList<Recipe> getAllRecipes() {
+        ArrayList<Recipe> recipes = new ArrayList<>();
 
+        for (Instruction instruction: all.values()){
+            if(instruction instanceof Recipe)
+                recipes.add((Recipe) instruction);
+        }
+        return FXCollections.observableArrayList(recipes);
+    }
 
 
     public void unpublishProcedure(Instruction instruction) {

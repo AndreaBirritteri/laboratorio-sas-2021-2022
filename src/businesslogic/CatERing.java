@@ -20,7 +20,7 @@ public class CatERing {
     }
 
     private MenuManager menuMgr;
-    private InstructionManager recipeMgr;
+    private InstructionManager instructionManager;
     private UserManager userMgr;
     private EventManager eventMgr;
     private KitchenTaskManager kitchenTaskMgr;
@@ -31,7 +31,7 @@ public class CatERing {
 
     private CatERing() {
         menuMgr = new MenuManager();
-        recipeMgr = new InstructionManager();
+        instructionManager = new InstructionManager();
         userMgr = new UserManager();
         eventMgr = new EventManager();
         kitchenTaskMgr = new KitchenTaskManager();
@@ -49,8 +49,8 @@ public class CatERing {
         return menuMgr;
     }
 
-    public InstructionManager getRecipeManager() {
-        return recipeMgr;
+    public InstructionManager getInstructionManager() {
+        return instructionManager;
     }
 
     public UserManager getUserManager() {

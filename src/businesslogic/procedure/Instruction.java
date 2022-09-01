@@ -110,7 +110,7 @@ public abstract class Instruction {
         return res;
     }
 
-    public static ObservableList<Instruction> getAllRecipes() {
+    public static ObservableList<Instruction> getAllInstruction() {
         return FXCollections.observableArrayList(all.values());
     }
 
