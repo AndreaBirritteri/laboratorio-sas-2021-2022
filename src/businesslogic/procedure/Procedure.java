@@ -8,10 +8,9 @@ import java.util.List;
 public abstract class Procedure {
     private int id;
     private List<KitchenTask> assignedInTasks; //fixme: non utilizzato in questo caso d'uso ma necessario per un controllo nell'UC delle ricette (eliminazione procedura)
-    private List<Ingredient> ingredients;
-    private List <GroupedSteps> Steps;
+    private List<GroupedSteps> Steps;
 
-    private List <String> tags;
+    private List<String> tags;
 
 
     private String title;
@@ -24,7 +23,6 @@ public abstract class Procedure {
 
     public Procedure() {
         id = 0;
-        this.ingredients = new ArrayList<>();
         this.assignedInTasks = new ArrayList<>();
         this.Steps = new ArrayList<>();
 
@@ -34,20 +32,20 @@ public abstract class Procedure {
         return id;
     }
 
-    public void addIngredient(Ingredient ingredient) {
-        ingredients.add(ingredient);
+    public void addIngredientGroup(Ingredient ingredient) {
+        Steps.get(1).setIngredients(ingredient);
     }
 
-    public List<Ingredient> getIngredients() {
-        return ingredients;
+    public List<Ingredient> getIngredientsGroup() {
+        return Steps.get(1).getIngredients();
     }
 
     //this method extract all the procedures from the recipe list passed by argument
-    public static List<Procedure> retrieveProceduresToPrepare(List<Recipe> recipesToExtract) {
+   /* public static List<Procedure> retrieveProceduresToPrepare(List<Recipe> recipesToExtract) {
         List<Procedure> procedures = new ArrayList<>();
 
         for (Recipe recipe : recipesToExtract) {
-            Procedure newPrep = new Preparation();
+            Procedure newPrep = new Preparation(Steps.get(3).getSteps());
             for (Ingredient ingredient : recipe.getIngredients()) {
                 newPrep.addIngredient(ingredient);
                 procedures.add(newPrep);
@@ -56,7 +54,7 @@ public abstract class Procedure {
 
         return procedures;
     }
-
+*/
 
     public void defineSection(String name) {
 
@@ -121,17 +119,28 @@ public abstract class Procedure {
         //this.name = name;
     }
 
-    public void deleteRecipe(){
+    public void deleteRecipe() {
         //all.remove(this);
     }
 
-    public void editRecipe(){
-        //all.remove(this);
+    public void editRecipe(String title) {
+        this.title =  title;
     }
 
 
     public void copyProcedure() {
         //all.remove(this);
+    }
+
+
+    public void extractPreparation(String title) {
+        new Preparation(Steps.get(3).getSteps(), title,Steps.get(3).getIngredients());
+
+
+    }
+
+    public void editRepetitionRule(String s){
+        Steps.get(3).setRepetionRule(s);
     }
 
 
