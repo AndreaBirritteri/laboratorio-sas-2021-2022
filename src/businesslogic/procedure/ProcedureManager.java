@@ -7,7 +7,11 @@ import businesslogic.shift.Shift;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.util.ArrayList;
+
 public class ProcedureManager {
+
+   ArrayList<KitchenTaskEventReceiver> eventReceivers = new ArrayList<>();
 
     public ProcedureManager() {
         Recipe.loadAllRecipes();
@@ -20,11 +24,11 @@ public class ProcedureManager {
 
 
     public void addEventReceiver(KitchenTaskEventReceiver kitchenTaskEventReceiver) {
-        eventReceivers.add(kitchenTaskEventReceiver);
+        //eventReceivers.add(kitchenTaskEventReceiver);
     }
 
     public void removeEventReceiver(KitchenTaskEventReceiver kitchenTaskEventReceiver) {
-        eventReceivers.remove(kitchenTaskEventReceiver);
+        //eventReceivers.remove(kitchenTaskEventReceiver);
     }
 
     public void notifyKitchenSheetCreated(KitchenSheet sheet) {
@@ -47,7 +51,7 @@ public class ProcedureManager {
 
     public void notifyKitchenSheetRestored(KitchenSheet sheet) {
         for (KitchenTaskEventReceiver er : this.eventReceivers) {
-            er.updateKitchenSheetRestored(sheet);
+            //er.updateKitchenSheetRestored(sheet);
         }
     }
 
@@ -71,7 +75,7 @@ public class ProcedureManager {
 
     public void notifyShiftCompletenessChanged(Shift shift, boolean isCompleted) {
         for (KitchenTaskEventReceiver er : this.eventReceivers) {
-            er.updateShiftCompletenessChanged(shift, isCompleted);
+            //er.updateShiftCompletenessChanged(shift, isCompleted);
         }
     }
 
@@ -110,7 +114,7 @@ public class ProcedureManager {
     }
 
     public void modifyRepetition(){
-        currentRecipe.
+       // currentRecipe.
     }
 
 

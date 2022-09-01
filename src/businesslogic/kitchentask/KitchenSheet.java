@@ -95,6 +95,10 @@ public class KitchenSheet {
         return title;
     }
 
+    public int getId() {
+        return id;
+    }
+
     public void deleteKitchenTask(KitchenTask kitchenTask) {
         kitchenTasks.remove(kitchenTask);
     }
