@@ -3,7 +3,6 @@ package persistence;
 import businesslogic.kitchentask.KitchenSheet;
 import businesslogic.kitchentask.KitchenTask;
 import businesslogic.kitchentask.KitchenTaskEventReceiver;
-import businesslogic.shift.Shift;
 import org.apache.commons.lang3.NotImplementedException;
 
 public class KitchenTaskEventPersistence implements KitchenTaskEventReceiver {
@@ -23,22 +22,22 @@ public class KitchenTaskEventPersistence implements KitchenTaskEventReceiver {
     }
 
     @Override
-    public void updateKitchenSheetRestored() {
-        throw new NotImplementedException("Not implemented");
+    public void updateKitchenSheetRestored(KitchenSheet sheet) {
+        KitchenSheet.restoreSheet(sheet);
     }
 
     @Override
-    public void updateKitchenTasksRearranged(KitchenTask task) {
-        throw new NotImplementedException("Not implemented");
+    public void updateKitchenTasksRearranged(KitchenSheet sheet) {
+        KitchenSheet.rearrangeTask(sheet);
     }
 
     @Override
     public void updateKitchenTaskAssigned(KitchenTask task) {
-        throw new NotImplementedException("Not implemented");
+        KitchenTask.assignTask(task);
     }
 
     @Override
-    public void updateKitchenTaskCompleted(KitchenTask task) {
-        throw new NotImplementedException("Not implemented");
+    public void updateKitchenTaskCompleted(KitchenTask task, boolean isCompleted) {
+        KitchenTask.setTaskCompleteness(task, isCompleted);
     }
 }

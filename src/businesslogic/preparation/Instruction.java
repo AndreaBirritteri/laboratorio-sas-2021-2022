@@ -26,6 +26,11 @@ public abstract class Instruction {
     protected boolean published;
     protected int minutes;
 
+    @Override
+    public String toString() {
+        return title;
+    }
+
     public Instruction() {
         id = 0;
         this.assignedInTasks = new ArrayList<>();

@@ -64,9 +64,8 @@ public class TestKitchenTask1a {
             catERing.getKitchenTaskManager().assignTask(firstTask, tuesdayAfternoonShift, cookMarinella, minutes, quantity);
             System.out.println("Foglio con primo task assegnato: " + sheet);
 
-
             System.out.println("\nTEST SET FIRST TASK COMPLETED");
-            catERing.getKitchenTaskManager().specifyCompletedTask(firstTask);
+            catERing.getKitchenTaskManager().specifyTaskCompleted(firstTask, true);
             System.out.println("Foglio con primo task completato: " + sheet);
 
         } catch (Exception e) {

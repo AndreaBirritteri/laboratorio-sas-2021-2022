@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class InstructionManager {
 
-   ArrayList<KitchenTaskEventReceiver> eventReceivers = new ArrayList<>();
+    ArrayList<KitchenTaskEventReceiver> eventReceivers = new ArrayList<>();
 
     public InstructionManager() {
         Recipe.loadAllInstructions();
@@ -18,8 +18,6 @@ public class InstructionManager {
 
 
     private Recipe currentRecipe;
-
-
 
 
     public void addEventReceiver(KitchenTaskEventReceiver kitchenTaskEventReceiver) {
@@ -50,11 +48,11 @@ public class InstructionManager {
 
     public void notifyKitchenSheetRestored(KitchenSheet sheet) {
         for (KitchenTaskEventReceiver er : this.eventReceivers) {
-            er.updateKitchenSheetRestored();
+            er.updateKitchenSheetRestored(sheet);
         }
     }
 
-    public void notifyKitchenTasksRearranged(KitchenTask sheet) {
+    public void notifyKitchenTasksRearranged(KitchenSheet sheet) {
         for (KitchenTaskEventReceiver er : this.eventReceivers) {
             er.updateKitchenTasksRearranged(sheet);
         }
@@ -66,9 +64,9 @@ public class InstructionManager {
         }
     }
 
-    public void notifyKitchenTaskCompleted(KitchenTask task) {
+    public void notifyKitchenTaskCompleted(KitchenTask task, boolean isCompleted) {
         for (KitchenTaskEventReceiver er : this.eventReceivers) {
-            er.updateKitchenTaskCompleted(task);
+            er.updateKitchenTaskCompleted(task, isCompleted);
         }
     }
 /*
@@ -81,14 +79,13 @@ public class InstructionManager {
 
     public void addRecipe(String title) {
 
-            currentRecipe = new Recipe(title);
+        currentRecipe = new Recipe(title);
 
     }
 
     public void addProcedure(String title) {
         currentRecipe = new Recipe();
     }
-
 
 
     public void deleteProcedure(Instruction instruction) {
@@ -112,7 +109,7 @@ public class InstructionManager {
 
     }
 
-    public void modifyRepetition(){
+    public void modifyRepetition() {
         //currentRecipe.
     }
 
@@ -125,46 +122,47 @@ public class InstructionManager {
 
     }
 
-    public void viewRecipeBook(){
+    public void viewRecipeBook() {
 
     }
 
-    public void newSimpleStep(){
+    public void newSimpleStep() {
 
     }
 
-    public void editStep(){
+    public void editStep() {
 
     }
 
-    public void deleteStep(){
+    public void deleteStep() {
 
     }
 
-    public void addIngredient(){
+    public void addIngredient() {
 
     }
 
-    public void deleteIngredient(){
+    public void deleteIngredient() {
 
     }
 
-    public void addDetails(){
+    public void addDetails() {
 
     }
 
-    public void addInfo(){
+    public void addInfo() {
 
     }
 
-    public void publish(){
+    public void publish() {
 
     }
 
-    public void createVariant(){
+    public void createVariant() {
 
     }
-    public void extractPreparation(String title){
+
+    public void extractPreparation(String title) {
 
         currentRecipe = new Recipe();
     }

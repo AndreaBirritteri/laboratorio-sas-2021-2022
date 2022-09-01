@@ -1,6 +1,7 @@
 package businesslogic.kitchentask;
 
 import businesslogic.UseCaseLogicException;
+import businesslogic.event.ServiceInfo;
 import businesslogic.preparation.Instruction;
 import businesslogic.preparation.Recipe;
 import businesslogic.shift.Shift;
@@ -27,7 +28,7 @@ public class KitchenTask {
 
     @Override
     public String toString() {
-        return "\nKitchenTask{" +
+        return "KitchenTask{" +
                 "procedure=" + instruction +
                 ", shift=" + shift +
                 ", cook=" + cook +
@@ -35,11 +36,11 @@ public class KitchenTask {
                 ", quantity=" + quantity +
                 ", isCompleted=" + isCompleted +
                 ", id=" + id +
-                '}';
+                "}\n";
     }
 
-    void assign(Shift shift, User user, int minutes, int quantity) throws Exception {
-        if (!user.isAvailableFor(shift))
+    void assign(Shift shift, User user, int minutes, int quantity) throws UseCaseLogicException {
+        if (user !=null && !user.isAvailableFor(shift))
             throw new UseCaseLogicException();
 
         this.shift = shift;
@@ -98,7 +99,7 @@ public class KitchenTask {
     }
 
     public static void addTask(KitchenSheet sheet, KitchenTask taskToAdd, int posInKitchenSheet) {
-        String query = "INSERT INTO catering.KitchenTasks (completed, kitchen_sheet_id, procedure_id, position) VALUES (" +
+        String query = "INSERT INTO catering.KitchenTasks (completed, kitchen_sheet_id, preparation_id, position) VALUES (" +
                 taskToAdd.isCompleted() + ", " +
                 sheet.getId() + ", " +
                 taskToAdd.getInstruction().getId() + ", " +
@@ -108,9 +109,38 @@ public class KitchenTask {
         taskToAdd.id = PersistenceManager.getLastId();
     }
 
+    public static void addAllTasks(KitchenSheet sheet) {
+        int pos = 0;
+        for (KitchenTask task : sheet.getKitchenTasks()) {
+            addTask(sheet, task, pos);
+            pos++;
+        }
+    }
+
     public static void deleteTask(KitchenTask task) {
         String query = "DELETE FROM KitchenTasks WHERE id = " + task.id;
         PersistenceManager.executeUpdate(query);
+    }
+
+    public static void deleteAllTasks(KitchenSheet sheet) {
+        for (KitchenTask task : sheet.getKitchenTasks()) {
+            deleteTask(task);
+        }
+    }
+
+    public static void assignTask(KitchenTask task) {
+        String assign = "UPDATE catering.KitchenTasks SET minutes = '" + task.minutes +
+                "', quantity = '" + task.quantity +
+                "', cook_id = " + (task.cook == null ? null : task.cook.getId()) +
+                ", shift_when = '" + (task.shift == null ? null : task.shift.getDatetime()) +
+                "' WHERE id = " + task.id + ";";
+        PersistenceManager.executeUpdate(assign);
+    }
+
+    public static void setTaskCompleteness(KitchenTask task, boolean isCompleted) {
+        String assign = "UPDATE catering.KitchenTasks SET completed = " + (isCompleted ? 1 : 0) +
+                " WHERE id = " + task.id + ";";
+        PersistenceManager.executeUpdate(assign);
     }
 
 }

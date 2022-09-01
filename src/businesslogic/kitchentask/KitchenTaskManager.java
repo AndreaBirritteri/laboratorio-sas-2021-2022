@@ -41,13 +41,13 @@ public class KitchenTaskManager {
         }
     }
 
-    public void notifyKitchenSheetRestored() {
+    public void notifyKitchenSheetRestored(KitchenSheet sheet) {
         for (KitchenTaskEventReceiver er : this.eventReceivers) {
-            er.updateKitchenSheetRestored();
+            er.updateKitchenSheetRestored(sheet);
         }
     }
 
-    public void notifyKitchenTasksRearranged(KitchenTask sheet) {
+    public void notifyKitchenTasksRearranged(KitchenSheet sheet) {
         for (KitchenTaskEventReceiver er : this.eventReceivers) {
             er.updateKitchenTasksRearranged(sheet);
         }
@@ -59,9 +59,9 @@ public class KitchenTaskManager {
         }
     }
 
-    public void notifyKitchenTaskCompleted(KitchenTask task) {
+    public void notifyKitchenTaskCompletedChanged(KitchenTask task) {
         for (KitchenTaskEventReceiver er : this.eventReceivers) {
-            er.updateKitchenTaskCompleted(task);
+            er.updateKitchenTaskCompleted(task, task.isCompleted());
         }
     }
 
@@ -130,39 +130,38 @@ public class KitchenTaskManager {
     }
 
     public void restoreOriginalTasks() throws UseCaseLogicException {
-        if(currentKitchenSheet != null){
+        if (currentKitchenSheet != null) {
             currentKitchenSheet.restoreOriginalTasks();
-            notifyKitchenSheetRestored();
-        }else {
+            notifyKitchenSheetRestored(currentKitchenSheet);
+        } else {
             throw new UseCaseLogicException();
         }
     }
 
-    public void moveTask(KitchenTask task, int position) throws UseCaseLogicException {
+    public void moveTask(KitchenTask task, int toPosition) throws UseCaseLogicException {
         if (currentKitchenSheet == null) {
             throw new UseCaseLogicException();
-        } else if (position < 0 || position >= currentKitchenSheet.getKitchenTasks().size()) {
+        } else if (toPosition < 0 || toPosition >= currentKitchenSheet.getKitchenTasks().size()) {
             throw new IllegalArgumentException();
         } else {
-            this.currentKitchenSheet.moveTask(task, position);
-            this.notifyKitchenTasksRearranged(task);
+            this.notifyKitchenTasksRearranged(currentKitchenSheet);
         }
     }
 
-    public void assignTask(KitchenTask task, Shift shift, User user, int minutes, int quantity) throws Exception {
-        if(currentKitchenSheet != null && currentKitchenSheet.getKitchenTasks().contains(task)){
+    public void assignTask(KitchenTask task, Shift shift, User user, int minutes, int quantity) throws UseCaseLogicException {
+        if (currentKitchenSheet != null && currentKitchenSheet.getKitchenTasks().contains(task)) {
             task.assign(shift, user, minutes, quantity);
             notifyKitchenTaskAssigned(task);
-        }else{
+        } else {
             throw new UseCaseLogicException();
         }
     }
 
-    public void specifyCompletedTask(KitchenTask task) throws UseCaseLogicException {
-        if(currentKitchenSheet != null && currentKitchenSheet.getKitchenTasks().contains(task)){
-            currentKitchenSheet.setKitchenTaskAsCompleted(task);
-            notifyKitchenTaskCompleted(task);
-        }else{
+    public void specifyTaskCompleted(KitchenTask task, boolean isCompleted) throws UseCaseLogicException {
+        if (currentKitchenSheet != null && currentKitchenSheet.getKitchenTasks().contains(task)) {
+            currentKitchenSheet.setKitchenTaskCompleted(task, isCompleted);
+            notifyKitchenTaskCompletedChanged(task);
+        } else {
             throw new UseCaseLogicException();
         }
     }

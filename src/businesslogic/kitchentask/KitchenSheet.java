@@ -6,6 +6,7 @@ import businesslogic.menu.Menu;
 import businesslogic.preparation.Instruction;
 import businesslogic.shift.Shift;
 import businesslogic.user.Cook;
+import org.apache.commons.lang3.NotImplementedException;
 import persistence.PersistenceManager;
 
 import java.util.ArrayList;
@@ -27,13 +28,14 @@ public class KitchenSheet {
         restoreOriginalTasks();
     }
 
+
     @Override
     public String toString() {
         return "KitchenSheet{" +
                 "title='" + title + '\'' +
                 ", id=" + id +
                 ", service=" + service +
-                ", kitchenTasks=" + kitchenTasks +
+                ", \nkitchenTasks=\n" + kitchenTasks +
                 '}';
     }
 
@@ -102,6 +104,7 @@ public class KitchenSheet {
     }
 
     public void restoreOriginalTasks() {
+        //todo check if it works
         Menu menu = service.getMenu();
         ArrayList<Instruction> recipes = menu.getRecipes();
         List<Instruction> instructions = Instruction.getInstructionsOfRecipes(recipes);
@@ -120,8 +123,8 @@ public class KitchenSheet {
         kitchenTasks.get(kitchenTasks.indexOf(kitchenTask)).assign(shift, cook, minutes, quantity);
     }
 
-    public void setKitchenTaskAsCompleted(KitchenTask kitchenTask) {
-        kitchenTasks.get(kitchenTasks.indexOf(kitchenTask)).setCompleted(true);
+    public void setKitchenTaskCompleted(KitchenTask kitchenTask, boolean isCompleted) {
+        kitchenTasks.get(kitchenTasks.indexOf(kitchenTask)).setCompleted(isCompleted);
     }
 
     //Persistence
@@ -146,5 +149,18 @@ public class KitchenSheet {
                 ");";
         PersistenceManager.executeUpdate(secInsert);
         task.id = PersistenceManager.getLastId();
+    }
+
+    public static void rearrangeTask(KitchenSheet sheet) {
+        for (int newPos = 0; newPos < sheet.kitchenTasks.size(); newPos++) {
+            String changePosition = "UPDATE catering.KitchenTasks SET position = " + newPos + " WHERE id = " + sheet.kitchenTasks.get(newPos).id;
+            PersistenceManager.executeUpdate(changePosition);
+        }
+
+    }
+
+    public static void restoreSheet(KitchenSheet sheet) {
+        //KitchenTask.deleteAllTasks(sheet);
+        //KitchenTask.addAllTasks(sheet);
     }
 }
