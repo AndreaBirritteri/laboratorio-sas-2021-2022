@@ -9,7 +9,7 @@ public interface KitchenTaskEventReceiver {
 
     public void updateKitchenTaskDeleted(KitchenTask task);
 
-    public void updateKitchenSheetRestored(KitchenSheet sheet);
+    public void updateKitchenSheetRestored();
 
     public void updateKitchenTasksRearranged(KitchenTask task);
 

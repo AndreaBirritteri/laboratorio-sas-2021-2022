@@ -21,7 +21,7 @@ public class KitchenTaskEventPersistence implements KitchenTaskEventReceiver {
     }
 
     @Override
-    public void updateKitchenSheetRestored(KitchenSheet sheet) {
+    public void updateKitchenSheetRestored() {
 
     }
 

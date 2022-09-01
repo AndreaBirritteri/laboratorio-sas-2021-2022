@@ -59,7 +59,6 @@ public class ServiceInfo implements EventItemInfo {
                 result.add(serv);
             }
         });
-
         return result;
     }
 }

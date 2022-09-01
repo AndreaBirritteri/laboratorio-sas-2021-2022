@@ -71,6 +71,15 @@ public class KitchenSheet {
         return res.get();
     }
 
+    public static int getIdFromServiceId(int serviceId) {
+        AtomicInteger res = new AtomicInteger(-1);
+        String sheetIdFind = "SELECT id FROM catering.KitchenSheets WHERE service_id = " + serviceId;
+        PersistenceManager.executeQuery(sheetIdFind, rs -> {
+            res.set(rs.getInt("id"));
+        });
+        return res.get();
+    }
+
     static public KitchenSheet loadSheetInfoByTitle(String title, ServiceInfo service) throws BusinessLogicException {
         int idFromTitle = getIdFromTitleAndServiceId(title, service.getId());
         if(idFromTitle < 0) {
@@ -94,9 +103,8 @@ public class KitchenSheet {
         Menu menu = service.getMenu();
         ArrayList<Recipe> recipes = menu.getRecipes();
         List<Procedure> procedures = Procedure.retrieveProceduresToPrepare(recipes);
-
-        for (Procedure proc : procedures) {
-            KitchenTask task = new KitchenTask(proc);
+        for (Procedure procedure : procedures) {
+            KitchenTask task = new KitchenTask(procedure);
             kitchenTasks.add(task);
         }
     }

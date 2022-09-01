@@ -5,9 +5,9 @@ import com.sun.javafx.binding.StringFormatter;
 import java.sql.*;
 
 public class PersistenceManager {
-    private static String url = "jdbc:mysql://raoulrondinella.duckdns.org:33060/catering";
+    private static String url = "jdbc:mysql://localhost:3306/catering";
     private static String username = "root";
-    private static String password = "root_password";
+    private static String password = "";
 
     private static int lastId;
 
