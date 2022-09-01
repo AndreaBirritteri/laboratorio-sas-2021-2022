@@ -7,14 +7,18 @@ import businesslogic.shift.Shift;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.util.ArrayList;
+
 public class ProcedureManager {
 
+   ArrayList<KitchenTaskEventReceiver> eventReceivers = new ArrayList<>();
+
     public ProcedureManager() {
-        Procedure.loadAllRecipes();
+        Recipe.loadAllRecipes();
     }
 
 
-    private Procedure currentProcedure;
+    private Recipe currentRecipe;
 
 
 
@@ -78,22 +82,22 @@ public class ProcedureManager {
 
     public void addRecipe(String title) {
 
-            currentProcedure = new Recipe(title);
+            currentRecipe = new Recipe(title);
 
     }
 
     public void addProcedure(String title) {
-        currentProcedure = new Recipe();
+        currentRecipe = new Recipe();
     }
 
 
 
     public void deleteProcedure(Procedure procedure) {
-        currentProcedure.deleteRecipe();
+        currentRecipe.deleteRecipe();
     }
 
     public void editProcedure(Procedure procedure) {
-            currentProcedure.editRecipe();
+            currentRecipe.editRecipe();
     }
 
     public void copyProcedure(Procedure procedure) {
@@ -105,12 +109,12 @@ public class ProcedureManager {
     }
 
     public void defineSection(String name) {
-        currentProcedure.defineSection(name);
+        currentRecipe.defineSection(name);
 
     }
 
     public void modifyRepetition(){
-        currentProcedure.
+        currentRecipe.
     }
 
 
@@ -163,7 +167,7 @@ public class ProcedureManager {
     }
     public void extractPreparation(String title){
 
-        currentProcedure = new Recipe();
+        currentRecipe = new Recipe();
     }
 
 

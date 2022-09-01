@@ -40,7 +40,7 @@ public class KitchenTask {
     }
 
     void assign(Shift shift, User user, int minutes, int quantity) throws Exception {
-        if(!user.isAvailableFor(shift))
+        if (!user.isAvailableFor(shift))
             throw new UseCaseLogicException();
 
         this.shift = shift;
@@ -84,7 +84,7 @@ public class KitchenTask {
         PersistenceManager.executeQuery(query, new ResultHandler() {
             @Override
             public void handle(ResultSet rs) throws SQLException {
-                Procedure procedure = Recipe.loadRecipeById(rs.getInt("procedures_id"));
+                Procedure procedure = Recipe.loadRecipeById(rs.getInt("procedure_id"));
                 KitchenTask task = new KitchenTask(procedure);
                 task.id = rs.getInt("id");
                 task.minutes = rs.getInt("minutes");
@@ -98,5 +98,15 @@ public class KitchenTask {
         return result;
     }
 
+    public static void addTask(KitchenSheet sheet, KitchenTask taskToAdd, int posInKitchenSheet) {
+        String secInsert = "INSERT INTO catering.KitchenTasks (completed, kitchen_sheet_id, procedure_id, position) VALUES (" +
+                taskToAdd.isCompleted() + ", " +
+                sheet.getId() + ", " +
+                taskToAdd.getProcedure().getId() + ", " +
+                posInKitchenSheet +
+                ");";
+        PersistenceManager.executeUpdate(secInsert);
+        taskToAdd.id = PersistenceManager.getLastId();
+    }
 
 }

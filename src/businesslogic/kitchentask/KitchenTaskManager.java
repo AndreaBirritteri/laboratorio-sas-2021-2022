@@ -66,12 +66,6 @@ public class KitchenTaskManager {
         }
     }
 
-    public void notifyShiftCompletenessChanged(Shift shift, boolean isCompleted) {
-        for (KitchenTaskEventReceiver er : this.eventReceivers) {
-            er.updateShiftCompletenessChanged(shift, isCompleted);
-        }
-    }
-
     public KitchenSheet createKitchenSheet(String title, EventInfo event, ServiceInfo service) throws UseCaseLogicException, BusinessLogicException {
         KitchenSheet kitchenSheet;
         User user = CatERing.getInstance().getUserManager().getCurrentUser();
