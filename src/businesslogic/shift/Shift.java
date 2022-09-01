@@ -1,5 +1,4 @@
 package businesslogic.shift;
-
 public class Shift {
     private String datetime;
     private boolean isCompleted;
@@ -12,6 +11,15 @@ public class Shift {
                 '}';
     }
 
+    public boolean isCompleted() {
+        return isCompleted;
+    }
+
+    public void setCompleted(boolean isCompleted){
+        this.isCompleted = isCompleted;
+        ShiftManager.updateIsCompleted(this);
+    }
+
     public Shift(String datetime){
         this.datetime = datetime;
     }
@@ -20,7 +28,5 @@ public class Shift {
         return datetime;
     }
 
-    public void setCompleted(boolean isCompleted){
-        this.isCompleted = isCompleted;
-    }
+
 }
