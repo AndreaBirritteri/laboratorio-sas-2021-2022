@@ -42,9 +42,9 @@ public class KitchenTaskManager {
         }
     }
 
-    public void notifyKitchenSheetRestored(KitchenSheet sheet) {
+    public void notifyKitchenSheetRestored() {
         for (KitchenTaskEventReceiver er : this.eventReceivers) {
-            er.updateKitchenSheetRestored(sheet);
+            er.updateKitchenSheetRestored();
         }
     }
 
@@ -72,8 +72,28 @@ public class KitchenTaskManager {
         }
     }
 
-    public KitchenSheet createKitchenSheet(String title, EventInfo event, ServiceInfo service) {
-        throw new NotImplementedException("not implemented");
+    public KitchenSheet createKitchenSheet(String title, EventInfo event, ServiceInfo service) throws UseCaseLogicException, BusinessLogicException {
+        KitchenSheet kitchenSheet;
+        User user = CatERing.getInstance().getUserManager().getCurrentUser();
+
+        if (!user.isChef() ||
+                !event.getServices().contains(service) ||
+                service.getMenu() == null ||
+                !user.getAssignedEvents().contains(event)) {
+            throw new UseCaseLogicException();
+        }
+        if (KitchenSheet.getIdFromTitleAndServiceId(title, service.getId()) >= 0) {
+            kitchenSheet = KitchenSheet.loadSheetInfoByTitle(title, service);
+        } else if (KitchenSheet.getIdFromServiceId(service.getId()) >= 0) {
+            throw new BusinessLogicException("\"" + service.getName() + "\", già esistente ma ha un altro titolo.");
+        } else {
+            kitchenSheet = new KitchenSheet(title, service);
+            notifyKitchenSheetCreated(kitchenSheet);
+        }
+
+        setCurrentKitchenSheet(kitchenSheet);
+
+        return kitchenSheet;
     }
 
     public void setCurrentKitchenSheet(KitchenSheet sheet) throws UseCaseLogicException {
@@ -116,8 +136,13 @@ public class KitchenTaskManager {
         }
     }
 
-    public void restoreOriginalTasks() {
-        throw new NotImplementedException("not implemented");
+    public void restoreOriginalTasks() throws UseCaseLogicException {
+        if(currentKitchenSheet != null){
+            currentKitchenSheet.restoreOriginalTasks();
+            notifyKitchenSheetRestored();
+        }else {
+            throw new UseCaseLogicException();
+        }
     }
 
     public void moveTask(KitchenTask task, int position) throws UseCaseLogicException {

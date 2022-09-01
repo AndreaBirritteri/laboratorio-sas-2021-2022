@@ -1,5 +1,6 @@
 package businesslogic.event;
 
+import businesslogic.UseCaseLogicException;
 import businesslogic.user.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -23,7 +24,7 @@ public class EventInfo implements EventItemInfo {
 
     @Override
     public boolean equals(Object obj) {
-        if(obj instanceof EventInfo)
+        if (obj instanceof EventInfo)
             return this.id == ((EventInfo) obj).id;
         return super.equals(obj);
     }
@@ -87,24 +88,23 @@ public class EventInfo implements EventItemInfo {
                 all.add(e);
             }
         });
-
         for (EventInfo e : all) {
             e.services = ServiceInfo.loadServiceInfoForEvent(e.id);
         }
         return all;
     }
 
-    public static EventInfo getEventByName(String name) throws Exception {
-        ArrayList<EventInfo> events = new ArrayList<>(loadAllEventInfo().stream().toList()) ;
+    public static EventInfo getEventByName(String name) throws UseCaseLogicException {
+        ArrayList<EventInfo> events = new ArrayList<>(loadAllEventInfo().stream().toList());
 
         for (EventInfo event : events) {
-            if(event.name.equals(name))
+            if (event.name.equals(name))
                 return event;
         }
-        throw new Exception("Evento non trovato");
+        throw new UseCaseLogicException();
     }
 
-    public ServiceInfo getFirstService(){
+    public ServiceInfo getFirstService() {
         loadAllEventInfo();
         return services.get(0);
     }
