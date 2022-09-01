@@ -1,9 +1,9 @@
 package businesslogic.kitchentask;
 
+import businesslogic.UseCaseLogicException;
 import businesslogic.procedure.Procedure;
 import businesslogic.procedure.Recipe;
 import businesslogic.shift.Shift;
-import businesslogic.user.Cook;
 import businesslogic.user.User;
 import persistence.PersistenceManager;
 import persistence.ResultHandler;
@@ -28,7 +28,7 @@ public class KitchenTask {
 
     @Override
     public String toString() {
-        return "KitchenTask{" +
+        return "\nKitchenTask{" +
                 "procedure=" + procedure +
                 ", shift=" + shift +
                 ", cook=" + cook +
@@ -39,12 +39,12 @@ public class KitchenTask {
                 '}';
     }
 
-    void assign(Shift shift, Cook cook, int minutes, int quantity) throws Exception {
-        if(!cook.isAvailableFor(shift))
-            throw new Exception("Not available");
+    void assign(Shift shift, User user, int minutes, int quantity) throws Exception {
+        if(!user.isAvailableFor(shift))
+            throw new UseCaseLogicException();
 
         this.shift = shift;
-        this.cook = cook;
+        this.cook = user;
         this.minutes = minutes;
         this.quantity = quantity;
     }

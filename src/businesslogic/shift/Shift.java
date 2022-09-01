@@ -4,6 +4,14 @@ public class Shift {
     private String datetime;
     private boolean isCompleted;
 
+    @Override
+    public String toString() {
+        return "Shift{" +
+                "datetime='" + datetime + '\'' +
+                ", isCompleted=" + isCompleted +
+                '}';
+    }
+
     public Shift(String datetime){
         this.datetime = datetime;
     }

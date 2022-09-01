@@ -11,32 +11,32 @@ public class KitchenTaskEventPersistence implements KitchenTaskEventReceiver {
     }
 
     @Override
-    public void updateTaskAdded(KitchenSheet sheet, KitchenTask task) {
+    public void updateKitchenTaskAdded(KitchenSheet sheet, KitchenTask task) {
 
     }
 
     @Override
-    public void updateTaskDeleted(KitchenTask task) {
+    public void updateKitchenTaskDeleted(KitchenTask task) {
 
     }
 
     @Override
-    public void updateSheetRestored(KitchenSheet sheet) {
+    public void updateKitchenSheetRestored(KitchenSheet sheet) {
 
     }
 
     @Override
-    public void updateTasksRearranged(KitchenSheet sheet) {
+    public void updateKitchenTasksRearranged(KitchenTask task) {
 
     }
 
     @Override
-    public void updateTaskAssigned(KitchenSheet sheet, KitchenTask task) {
+    public void updateKitchenTaskAssigned(KitchenTask task) {
 
     }
 
     @Override
-    public void updateTaskCompleted(KitchenSheet sheet, KitchenTask task) {
+    public void updateKitchenTaskCompleted(KitchenTask task) {
 
     }
 

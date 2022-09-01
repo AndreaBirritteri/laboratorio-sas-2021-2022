@@ -12,6 +12,7 @@ import persistence.PersistenceManager;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class KitchenSheet {
@@ -36,6 +37,19 @@ public class KitchenSheet {
                 ", service=" + service +
                 ", kitchenTasks=" + kitchenTasks +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        KitchenSheet that = (KitchenSheet) o;
+        return id == that.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 
     public KitchenTask addKitchenTask(Procedure procedure) {
@@ -88,14 +102,15 @@ public class KitchenSheet {
     }
 
     public void moveTask(KitchenTask kitchenTask, int position) {
-        kitchenTasks.set(position, kitchenTask);
+        kitchenTasks.remove(kitchenTask);
+        kitchenTasks.add(position, kitchenTask);
     }
 
     public void assignTask(KitchenTask kitchenTask, Shift shift, Cook cook, int minutes, int quantity) throws Exception {
         kitchenTasks.get(kitchenTasks.indexOf(kitchenTask)).assign(shift, cook, minutes, quantity);
     }
 
-    public void specifyCompletedTask(KitchenTask kitchenTask) {
-        throw new NotImplementedException("not implemented");
+    public void setKitchenTaskAsCompleted(KitchenTask kitchenTask) {
+        kitchenTasks.get(kitchenTasks.indexOf(kitchenTask)).setCompleted(true);
     }
 }

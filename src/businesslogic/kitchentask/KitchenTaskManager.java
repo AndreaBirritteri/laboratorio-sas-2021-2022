@@ -24,45 +24,45 @@ public class KitchenTaskManager {
         eventReceivers.remove(kitchenTaskEventReceiver);
     }
 
-    public void notifySheetCreated(KitchenSheet sheet) {
+    public void notifyKitchenSheetCreated(KitchenSheet sheet) {
         for (KitchenTaskEventReceiver er : this.eventReceivers) {
             er.updateSheetCreated(sheet);
         }
     }
 
-    public void notifyTaskAdded(KitchenSheet sheet, KitchenTask task) {
+    public void notifyKitchenTaskAdded(KitchenSheet sheet, KitchenTask task) {
         for (KitchenTaskEventReceiver er : this.eventReceivers) {
-            er.updateTaskAdded(sheet, task);
+            er.updateKitchenTaskAdded(sheet, task);
         }
     }
 
-    public void notifyTaskDeleted(KitchenTask task) {
+    public void notifyKitchenTaskDeleted(KitchenTask task) {
         for (KitchenTaskEventReceiver er : this.eventReceivers) {
-            er.updateTaskDeleted(task);
+            er.updateKitchenTaskDeleted(task);
         }
     }
 
-    public void notifySheetRestored(KitchenSheet sheet) {
+    public void notifyKitchenSheetRestored(KitchenSheet sheet) {
         for (KitchenTaskEventReceiver er : this.eventReceivers) {
-            er.updateSheetRestored(sheet);
+            er.updateKitchenSheetRestored(sheet);
         }
     }
 
-    public void notifyTasksRearranged(KitchenSheet sheet) {
+    public void notifyKitchenTasksRearranged(KitchenTask sheet) {
         for (KitchenTaskEventReceiver er : this.eventReceivers) {
-            er.updateTasksRearranged(sheet);
+            er.updateKitchenTasksRearranged(sheet);
         }
     }
 
-    public void notifyTaskAssigned(KitchenSheet sheet, KitchenTask task) {
+    public void notifyKitchenTaskAssigned(KitchenTask task) {
         for (KitchenTaskEventReceiver er : this.eventReceivers) {
-            er.updateTaskAssigned(sheet, task);
+            er.updateKitchenTaskAssigned(task);
         }
     }
 
-    public void notifyTaskCompleted(KitchenSheet sheet, KitchenTask task) {
+    public void notifyKitchenTaskCompleted(KitchenTask task) {
         for (KitchenTaskEventReceiver er : this.eventReceivers) {
-            er.updateTaskCompleted(sheet, task);
+            er.updateKitchenTaskCompleted(task);
         }
     }
 
@@ -101,7 +101,7 @@ public class KitchenTaskManager {
     public KitchenTask addKitchenTask(Procedure procedure) throws UseCaseLogicException {
         if (currentKitchenSheet != null) {
             KitchenTask kitchenTask = this.currentKitchenSheet.addKitchenTask(procedure);
-            this.notifyTaskAdded(currentKitchenSheet, kitchenTask);
+            this.notifyKitchenTaskAdded(currentKitchenSheet, kitchenTask);
             return kitchenTask;
         }
         throw new UseCaseLogicException();
@@ -110,24 +110,42 @@ public class KitchenTaskManager {
     public void deleteKitchenTask(KitchenTask task) throws UseCaseLogicException {
         if (currentKitchenSheet != null && currentKitchenSheet.getKitchenTasks().contains(task)) {
             currentKitchenSheet.deleteKitchenTask(task);
-            this.notifyTaskDeleted(task);
+            this.notifyKitchenTaskDeleted(task);
+        } else {
+            throw new UseCaseLogicException();
         }
-        throw new UseCaseLogicException();
     }
 
     public void restoreOriginalTasks() {
         throw new NotImplementedException("not implemented");
     }
 
-    public void moveTask(KitchenTask task, int position) {
-        throw new NotImplementedException("not implemented");
+    public void moveTask(KitchenTask task, int position) throws UseCaseLogicException {
+        if (currentKitchenSheet == null) {
+            throw new UseCaseLogicException();
+        } else if (position < 0 || position >= currentKitchenSheet.getKitchenTasks().size()) {
+            throw new IllegalArgumentException();
+        } else {
+            this.currentKitchenSheet.moveTask(task, position);
+            this.notifyKitchenTasksRearranged(task);
+        }
     }
 
-    public void assignTask(KitchenTask task, Shift shift, User cook, int minutes, int quantity) {
-        throw new NotImplementedException("not implemented");
+    public void assignTask(KitchenTask task, Shift shift, User user, int minutes, int quantity) throws Exception {
+        if(currentKitchenSheet != null && currentKitchenSheet.getKitchenTasks().contains(task)){
+            task.assign(shift, user, minutes, quantity);
+            notifyKitchenTaskAssigned(task);
+        }else{
+            throw new UseCaseLogicException();
+        }
     }
 
-    public void specifyCompletedTask(KitchenTask task) {
-        throw new NotImplementedException("not implemented");
+    public void specifyCompletedTask(KitchenTask task) throws UseCaseLogicException {
+        if(currentKitchenSheet != null && currentKitchenSheet.getKitchenTasks().contains(task)){
+            currentKitchenSheet.setKitchenTaskAsCompleted(task);
+            notifyKitchenTaskCompleted(task);
+        }else{
+            throw new UseCaseLogicException();
+        }
     }
 }
