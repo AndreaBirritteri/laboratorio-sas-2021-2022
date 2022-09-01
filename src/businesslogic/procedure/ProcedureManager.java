@@ -10,11 +10,11 @@ import javafx.collections.ObservableList;
 public class ProcedureManager {
 
     public ProcedureManager() {
-        Recipe.loadAllRecipes();
+        Procedure.loadAllRecipes();
     }
 
 
-    private Recipe currentRecipe;
+    private Procedure currentProcedure;
 
 
 
@@ -78,22 +78,22 @@ public class ProcedureManager {
 
     public void addRecipe(String title) {
 
-            currentRecipe = new Recipe(title);
+            currentProcedure = new Recipe(title);
 
     }
 
     public void addProcedure(String title) {
-        currentRecipe = new Recipe();
+        currentProcedure = new Recipe();
     }
 
 
 
     public void deleteProcedure(Procedure procedure) {
-        currentRecipe.deleteRecipe();
+        currentProcedure.deleteRecipe();
     }
 
     public void editProcedure(Procedure procedure) {
-            currentRecipe.editRecipe();
+            currentProcedure.editRecipe();
     }
 
     public void copyProcedure(Procedure procedure) {
@@ -105,12 +105,12 @@ public class ProcedureManager {
     }
 
     public void defineSection(String name) {
-        currentRecipe.defineSection(name);
+        currentProcedure.defineSection(name);
 
     }
 
     public void modifyRepetition(){
-        currentRecipe.
+        currentProcedure.
     }
 
 
@@ -163,7 +163,7 @@ public class ProcedureManager {
     }
     public void extractPreparation(String title){
 
-        currentRecipe = new Recipe();
+        currentProcedure = new Recipe();
     }
 
 
