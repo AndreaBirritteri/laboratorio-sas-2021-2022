@@ -9,12 +9,12 @@ import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
 
-public class ProcedureManager {
+public class InstructionManager {
 
    ArrayList<KitchenTaskEventReceiver> eventReceivers = new ArrayList<>();
 
-    public ProcedureManager() {
-        Recipe.loadAllRecipes();
+    public InstructionManager() {
+        Recipe.loadAllInstructions();
     }
 
 
@@ -51,7 +51,7 @@ public class ProcedureManager {
 
     public void notifyKitchenSheetRestored(KitchenSheet sheet) {
         for (KitchenTaskEventReceiver er : this.eventReceivers) {
-            er.updateKitchenSheetRestored(sheet);
+            er.updateKitchenSheetRestored();
         }
     }
 
@@ -72,13 +72,13 @@ public class ProcedureManager {
             er.updateKitchenTaskCompleted(task);
         }
     }
-
+/*
     public void notifyShiftCompletenessChanged(Shift shift, boolean isCompleted) {
         for (KitchenTaskEventReceiver er : this.eventReceivers) {
             er.updateShiftCompletenessChanged(shift, isCompleted);
         }
     }
-
+*/
 
     public void addRecipe(String title) {
 
@@ -92,19 +92,19 @@ public class ProcedureManager {
 
 
 
-    public void deleteProcedure(Procedure procedure) {
+    public void deleteProcedure(Instruction instruction) {
         currentRecipe.deleteRecipe();
     }
-
-    public void editProcedure(Procedure procedure) {
+/*
+    public void editProcedure(Instruction instruction) {
             currentRecipe.editRecipe();
+    }*/
+
+    public void copyProcedure(Instruction instruction) {
+
     }
 
-    public void copyProcedure(Procedure procedure) {
-
-    }
-
-    public void unpublishProcedure(Procedure procedure) {
+    public void unpublishProcedure(Instruction instruction) {
 
     }
 
@@ -114,7 +114,7 @@ public class ProcedureManager {
     }
 
     public void modifyRepetition(){
-        currentRecipe.
+        //currentRecipe.
     }
 
 
@@ -170,9 +170,7 @@ public class ProcedureManager {
         currentRecipe = new Recipe();
     }
 
-
-
-    public ObservableList<Recipe> getRecipes() {
+    public ObservableList<Instruction> getInstructions() {
         return FXCollections.unmodifiableObservableList(Recipe.getAllRecipes());
     }
 }

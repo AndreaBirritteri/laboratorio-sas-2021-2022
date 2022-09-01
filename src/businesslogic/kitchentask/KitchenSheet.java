@@ -3,11 +3,9 @@ package businesslogic.kitchentask;
 import businesslogic.BusinessLogicException;
 import businesslogic.event.ServiceInfo;
 import businesslogic.menu.Menu;
-import businesslogic.procedure.Procedure;
-import businesslogic.procedure.Recipe;
+import businesslogic.procedure.Instruction;
 import businesslogic.shift.Shift;
 import businesslogic.user.Cook;
-import org.apache.commons.lang3.NotImplementedException;
 import persistence.PersistenceManager;
 
 import java.util.ArrayList;
@@ -52,8 +50,8 @@ public class KitchenSheet {
         return Objects.hash(id);
     }
 
-    public KitchenTask addKitchenTask(Procedure procedure) {
-        KitchenTask kitchenTask = new KitchenTask(procedure);
+    public KitchenTask addKitchenTask(Instruction instruction) {
+        KitchenTask kitchenTask = new KitchenTask(instruction);
         kitchenTasks.add(kitchenTask);
         return kitchenTask;
     }
@@ -105,10 +103,10 @@ public class KitchenSheet {
 
     public void restoreOriginalTasks() {
         Menu menu = service.getMenu();
-        ArrayList<Recipe> recipes = menu.getRecipes();
-        List<Procedure> procedures = Procedure.retrieveProceduresToPrepare(recipes);
-        for (Procedure procedure : procedures) {
-            KitchenTask task = new KitchenTask(procedure);
+        ArrayList<Instruction> recipes = menu.getRecipes();
+        List<Instruction> instructions = Instruction.getInstructionsOfRecipes(recipes);
+        for (Instruction instruction : instructions) {
+            KitchenTask task = new KitchenTask(instruction);
             kitchenTasks.add(task);
         }
     }

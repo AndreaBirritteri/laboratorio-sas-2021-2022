@@ -1,6 +1,7 @@
 package businesslogic.menu;
 
 import businesslogic.CatERing;
+import businesslogic.procedure.Instruction;
 import businesslogic.procedure.Recipe;
 import businesslogic.user.User;
 import javafx.collections.FXCollections;
@@ -78,14 +79,14 @@ public class Menu {
 
     }
 
-    public ArrayList<Recipe> getRecipes(){
+    public ArrayList<Instruction> getRecipes(){
 
         ArrayList<MenuItem> items = new ArrayList<>(freeItems);
         for(Section section: sections){
             items.addAll(section.getItems());
         }
 
-        ArrayList<Recipe> recipes = new ArrayList<>();
+        ArrayList<Instruction> recipes = new ArrayList<>();
         for(MenuItem item: items){
             recipes.add(item.getItemRecipe());
         }
@@ -157,7 +158,7 @@ public class Menu {
         this.sections.add(new Section("Secondi"));
         this.sections.add(new Section("Dessert"));
 
-        Recipe[] all = CatERing.getInstance().getRecipeManager().getRecipes().toArray(new Recipe[0]);
+        Recipe[] all = CatERing.getInstance().getRecipeManager().getInstructions().toArray(new Recipe[0]);
         freeItems.add(new MenuItem(all[3]));
         freeItems.add(new MenuItem(all[4]));
         freeItems.add(new MenuItem(all[5]));
@@ -170,7 +171,7 @@ public class Menu {
         return sec;
     }
 
-    public MenuItem addItem(Recipe recipe, Section sec, String desc) {
+    public MenuItem addItem(Instruction recipe, Section sec, String desc) {
         MenuItem mi = new MenuItem(recipe, desc);
         if (sec != null) {
             sec.addItem(mi);
@@ -236,7 +237,7 @@ public class Menu {
                 updatedList.add(mi);
             } else {
                 prev.setDescription(mi.getDescription());
-                prev.setItemRecipe(mi.getItemRecipe());
+                prev.setItemRecipe((Recipe) mi.getItemRecipe());
                 updatedList.add(prev);
             }
         }

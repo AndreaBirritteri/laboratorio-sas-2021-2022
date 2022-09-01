@@ -1,10 +1,10 @@
 package businesslogic.procedure;
 
-public class Ingredient {
+public class Ingredient implements AbstractIngredient {
     private String quantity;
     private String description;
 
-    public Ingredient(String quantity, String description) {
+    public Ingredient(String description, String quantity) {
         this.quantity = quantity;
         this.description = description;
     }
@@ -23,5 +23,9 @@ public class Ingredient {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public static Ingredient asIngredient(Preparation preparation){
+        return new Ingredient(preparation.getTitle(), preparation.getQuantity());
     }
 }

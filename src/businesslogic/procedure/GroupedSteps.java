@@ -1,12 +1,11 @@
 package businesslogic.procedure;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class GroupedSteps {
 
     private ArrayList<String> steps;
-    private String repetionRule;
+    private String receptionRule;
     private boolean inAdvance;
     private ArrayList<Ingredient> ingredients;
 
@@ -23,12 +22,12 @@ public class GroupedSteps {
         this.steps = steps;
     }
 
-    public String getRepetionRule() {
-        return repetionRule;
+    public String getReceptionRule() {
+        return receptionRule;
     }
 
-    public void setRepetionRule(String repetionRule) {
-        this.repetionRule = repetionRule;
+    public void setReceptionRule(String receptionRule) {
+        this.receptionRule = receptionRule;
     }
 
     public boolean isInAdvance() {

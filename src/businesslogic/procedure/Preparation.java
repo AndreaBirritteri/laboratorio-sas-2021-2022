@@ -2,7 +2,7 @@ package businesslogic.procedure;
 
 import java.util.ArrayList;
 
-public class Preparation extends Procedure {
+public class Preparation extends Instruction implements AbstractIngredient {
 
     ArrayList<String> steps;
     String title;

@@ -1,5 +1,6 @@
 package businesslogic.menu;
 
+import businesslogic.procedure.Recipe;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import persistence.BatchUpdateHandler;
@@ -45,7 +46,7 @@ public class Section {
                 updatedList.add(mi);
             } else {
                 prev.setDescription(mi.getDescription());
-                prev.setItemRecipe(mi.getItemRecipe());
+                prev.setItemRecipe((Recipe) mi.getItemRecipe());
                 updatedList.add(prev);
             }
         }

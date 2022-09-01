@@ -5,10 +5,9 @@ import businesslogic.CatERing;
 import businesslogic.UseCaseLogicException;
 import businesslogic.event.EventInfo;
 import businesslogic.event.ServiceInfo;
-import businesslogic.procedure.Procedure;
+import businesslogic.procedure.Instruction;
 import businesslogic.shift.Shift;
 import businesslogic.user.User;
-import org.apache.commons.lang3.NotImplementedException;
 
 import java.util.ArrayList;
 
@@ -112,9 +111,9 @@ public class KitchenTaskManager {
         return currentSheet;
     }
 
-    public KitchenTask addKitchenTask(Procedure procedure) throws UseCaseLogicException {
+    public KitchenTask addKitchenTask(Instruction instruction) throws UseCaseLogicException {
         if (currentKitchenSheet != null) {
-            KitchenTask kitchenTask = this.currentKitchenSheet.addKitchenTask(procedure);
+            KitchenTask kitchenTask = this.currentKitchenSheet.addKitchenTask(instruction);
             this.notifyKitchenTaskAdded(currentKitchenSheet, kitchenTask);
             return kitchenTask;
         }

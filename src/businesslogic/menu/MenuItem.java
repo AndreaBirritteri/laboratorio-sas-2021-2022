@@ -1,5 +1,6 @@
 package businesslogic.menu;
 
+import businesslogic.procedure.Instruction;
 import businesslogic.procedure.Recipe;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,17 +17,17 @@ import java.util.List;
 public class MenuItem {
     private int id;
     private String description;
-    private Recipe itemRecipe;
+    private Instruction itemRecipe;
 
     private MenuItem() {
 
     }
 
     public MenuItem(Recipe rec) {
-        this(rec, rec.getName());
+        this(rec, rec.getTitle());
     }
 
-    public MenuItem(Recipe rec, String desc) {
+    public MenuItem(Instruction rec, String desc) {
         id = 0;
         itemRecipe = rec;
         description = desc;
@@ -56,7 +57,7 @@ public class MenuItem {
         this.description = description;
     }
 
-    public Recipe getItemRecipe() {
+    public Instruction getItemRecipe() {
         return itemRecipe;
     }
 

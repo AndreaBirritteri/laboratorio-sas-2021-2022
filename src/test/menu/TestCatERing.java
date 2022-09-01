@@ -6,7 +6,7 @@ import businesslogic.event.EventInfo;
 import businesslogic.event.ServiceInfo;
 import businesslogic.menu.Menu;
 import businesslogic.menu.Section;
-import businesslogic.procedure.Recipe;
+import businesslogic.procedure.Instruction;
 import javafx.collections.ObservableList;
 
 import java.util.Arrays;
@@ -41,7 +41,7 @@ public class TestCatERing {
             System.out.println("");
 
             System.out.println("\nTEST GET RECIPES AND INSERT ITEM IN SECTION");
-            ObservableList<Recipe> recipes = CatERing.getInstance().getRecipeManager().getRecipes();
+            ObservableList<Instruction> recipes = CatERing.getInstance().getRecipeManager().getInstructions();
             CatERing.getInstance().getMenuManager().insertItem(recipes.get(0), antipasti);
             CatERing.getInstance().getMenuManager().insertItem(recipes.get(1), antipasti);
             CatERing.getInstance().getMenuManager().insertItem(recipes.get(2), antipasti);

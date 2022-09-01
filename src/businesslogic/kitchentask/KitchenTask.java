@@ -1,7 +1,7 @@
 package businesslogic.kitchentask;
 
 import businesslogic.UseCaseLogicException;
-import businesslogic.procedure.Procedure;
+import businesslogic.procedure.Instruction;
 import businesslogic.procedure.Recipe;
 import businesslogic.shift.Shift;
 import businesslogic.user.User;
@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class KitchenTask {
-    private final Procedure procedure;
+    private final Instruction instruction;
     private Shift shift;
     private User cook;
     private int minutes;
@@ -22,14 +22,14 @@ public class KitchenTask {
     private boolean isCompleted;
     private int id;
 
-    KitchenTask(Procedure procedure) {
-        this.procedure = procedure;
+    KitchenTask(Instruction instruction) {
+        this.instruction = instruction;
     }
 
     @Override
     public String toString() {
         return "\nKitchenTask{" +
-                "procedure=" + procedure +
+                "procedure=" + instruction +
                 ", shift=" + shift +
                 ", cook=" + cook +
                 ", minutes=" + minutes +
@@ -57,8 +57,8 @@ public class KitchenTask {
         return isCompleted;
     }
 
-    public Procedure getProcedure() {
-        return procedure;
+    public Instruction getProcedure() {
+        return instruction;
     }
 
     public Shift getShift() {
@@ -84,8 +84,8 @@ public class KitchenTask {
         PersistenceManager.executeQuery(query, new ResultHandler() {
             @Override
             public void handle(ResultSet rs) throws SQLException {
-                Procedure procedure = Recipe.loadRecipeById(rs.getInt("procedure_id"));
-                KitchenTask task = new KitchenTask(procedure);
+                Instruction instruction = Recipe.loadRecipeById(rs.getInt("procedure_id"));
+                KitchenTask task = new KitchenTask(instruction);
                 task.id = rs.getInt("id");
                 task.minutes = rs.getInt("minutes");
                 task.quantity = rs.getInt("quantity");
