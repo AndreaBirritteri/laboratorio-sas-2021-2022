@@ -33,7 +33,7 @@ public class User {
         assignedEvents = new ArrayList<>();
     }
 
-    public Cook asCook() throws UseCaseLogicException {
+    public Cook asCook(){
         if (this.isRole(Role.CUOCO)) {
             Cook cook = new Cook();
             cook.id = this.id;
@@ -44,7 +44,7 @@ public class User {
             return cook;
         }
         else{
-            throw new UseCaseLogicException();
+            return null;
         }
     }
 

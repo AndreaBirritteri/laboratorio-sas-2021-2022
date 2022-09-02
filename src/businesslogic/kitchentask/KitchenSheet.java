@@ -122,7 +122,7 @@ public class KitchenSheet {
         kitchenTasks.add(position, kitchenTask);
     }
 
-    public void assignTask(KitchenTask kitchenTask, Shift shift, User cook, int minutes, int quantity) throws UseCaseLogicException {
+    public void assignTask(KitchenTask kitchenTask, Shift shift, Cook cook, int minutes, int quantity) throws UseCaseLogicException {
         kitchenTasks.get(kitchenTasks.indexOf(kitchenTask)).assign(shift, cook, minutes, quantity);
     }
 

@@ -1,10 +1,10 @@
 package businesslogic.kitchentask;
 
 import businesslogic.UseCaseLogicException;
-import businesslogic.event.ServiceInfo;
 import businesslogic.preparation.Instruction;
 import businesslogic.preparation.Recipe;
 import businesslogic.shift.Shift;
+import businesslogic.user.Cook;
 import businesslogic.user.User;
 import persistence.PersistenceManager;
 import persistence.ResultHandler;
@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class KitchenTask {
     private final Instruction instruction;
     private Shift shift;
-    private User cook;
+    private Cook cook;
     private int minutes;
     private int quantity;
     private boolean isCompleted;
@@ -24,6 +24,7 @@ public class KitchenTask {
 
     KitchenTask(Instruction instruction) {
         this.instruction = instruction;
+        this.isCompleted = false;
     }
 
     @Override
@@ -39,12 +40,12 @@ public class KitchenTask {
                 "}\n";
     }
 
-    void assign(Shift shift, User user, int minutes, int quantity) throws UseCaseLogicException {
-        if (user !=null && !user.isAvailableFor(shift))
+    void assign(Shift shift, Cook cook, int minutes, int quantity) throws UseCaseLogicException {
+        if (cook !=null && !cook.isAvailableFor(shift))
             throw new UseCaseLogicException();
 
         this.shift = shift;
-        this.cook = user;
+        this.cook = cook;
         this.minutes = minutes;
         this.quantity = quantity;
     }
@@ -91,7 +92,7 @@ public class KitchenTask {
                 task.quantity = rs.getInt("quantity");
                 task.isCompleted = rs.getInt("completed") != 0;
                 task.shift = new Shift(rs.getString("shift_when"));
-                task.cook = User.loadUserById(rs.getInt("cook_id"));
+                task.cook = User.loadUserById(rs.getInt("cook_id")).asCook();
                 result.add(task);
             }
         });
