@@ -5,6 +5,7 @@ import businesslogic.UseCaseLogicException;
 import businesslogic.event.ServiceInfo;
 import businesslogic.menu.Menu;
 import businesslogic.preparation.Instruction;
+import businesslogic.preparation.Recipe;
 import businesslogic.shift.Shift;
 import businesslogic.user.Cook;
 import businesslogic.user.User;
@@ -108,7 +109,7 @@ public class KitchenSheet {
     public void restoreOriginalTasks() {
         kitchenTasks.clear();
         Menu menu = service.getMenu();
-        ArrayList<Instruction> recipes = menu.getRecipes();
+        ArrayList<Recipe> recipes = menu.getRecipes();
         List<Instruction> instructions = Instruction.getInstructionsOfRecipes(recipes);
         for (Instruction instruction : instructions) {
             KitchenTask task = new KitchenTask(instruction);
