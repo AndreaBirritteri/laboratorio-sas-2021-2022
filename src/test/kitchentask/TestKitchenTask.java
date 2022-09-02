@@ -39,20 +39,23 @@ public class TestKitchenTask {
 
             KitchenTask task1 = catERing.getKitchenTaskManager().addKitchenTask(recipes.get(10));
             KitchenTask task2 = catERing.getKitchenTaskManager().addKitchenTask(recipes.get(14));
-            KitchenTask task3 = catERing.getKitchenTaskManager().addKitchenTask(recipes.get(15));
+            KitchenTask task3 = catERing.getKitchenTaskManager().addKitchenTask(recipes.get(3));
+            KitchenTask task4 = catERing.getKitchenTaskManager().addKitchenTask(recipes.get(8));
+            KitchenTask task5 = catERing.getKitchenTaskManager().addKitchenTask(recipes.get(15));
+            KitchenTask task6 = catERing.getKitchenTaskManager().addKitchenTask(recipes.get(11));
             System.out.println("Foglio con nuovi tasks: \"" + task1 + "\", \"" + task2 + "\", \"" + task3 + "\"" + sheet);
 
             System.out.println("\nTEST DELETE KITCHEN TASK");
-            catERing.getKitchenTaskManager().deleteKitchenTask(task1);
+            //catERing.getKitchenTaskManager().deleteKitchenTask(task1);
             //catERing.getKitchenTaskManager().deleteKitchenTask(task2);
             catERing.getKitchenTaskManager().deleteKitchenTask(task3);
 //			System.out.println("Foglio con tasks \"Panini al latte\", \"Bigne farciti\", \"Pizzette\" rimossi: "+sheet);
-            System.out.println("Foglio con nuovi tasks: \"" + task1 + "\", \"" + task3 + "\"" + sheet);
+            System.out.println("Foglio con nuovi tasks:  \"" + task3 + "\"" + sheet);
 
             System.out.println("\nTEST MOVE KITCHEN TASK");
             int firstPosition = 0;
             KitchenTask firstTask = sheet.getKitchenTasks().get(firstPosition);
-            int newPosition = 5;
+            int newPosition = sheet.getKitchenTasks().size() - 2;
             System.out.println("Spostiamo il " + firstPosition + " task \"" + firstTask.getInstruction() + "\" in posizione " + newPosition);
             catERing.getKitchenTaskManager().moveTask(firstTask, newPosition);
             System.out.println("Foglio con task spostato: " + sheet);
