@@ -4,6 +4,10 @@ import java.util.ArrayList;
 
 public class GroupedSteps {
 
+    private int id;
+
+    private String title;
+
     private ArrayList<String> steps;
     private String receptionRule;
     private boolean inAdvance;
@@ -13,6 +17,12 @@ public class GroupedSteps {
     public GroupedSteps() {
         this.steps = new ArrayList<>();
     }
+
+    public GroupedSteps(String title) {
+        this.title = title;
+        this.steps = new ArrayList<>();
+    }
+
 
     public ArrayList<String> getSteps() {
         return steps;

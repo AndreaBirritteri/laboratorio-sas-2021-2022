@@ -10,6 +10,8 @@ import java.sql.SQLException;
 import java.util.*;
 
 public class Recipe extends Instruction {
+    protected boolean published;
+
     public Recipe() {
 
     }

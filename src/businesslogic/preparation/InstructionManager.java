@@ -1,5 +1,6 @@
 package businesslogic.preparation;
 
+import businesslogic.event.ServiceInfo;
 import businesslogic.kitchentask.KitchenSheet;
 import businesslogic.kitchentask.KitchenTask;
 import businesslogic.kitchentask.KitchenTaskEventReceiver;
@@ -17,7 +18,7 @@ public class InstructionManager {
     }
 
 
-    private Recipe currentRecipe;
+    private Instruction currentRecipe;
 
 
     public void addEventReceiver(KitchenTaskEventReceiver kitchenTaskEventReceiver) {
@@ -83,7 +84,7 @@ public class InstructionManager {
 
     }
 
-    public void addProcedure(String title) {
+    public void addPreparation(String title) {
         currentRecipe = new Recipe();
     }
 
@@ -109,8 +110,8 @@ public class InstructionManager {
 
     }
 
-    public void modifyRepetition() {
-        //currentRecipe.
+    public void modifyRepetition(String repetition, int id) {
+        currentRecipe.editRepetitionRule(repetition,id);
     }
 
 
@@ -146,8 +147,8 @@ public class InstructionManager {
 
     }
 
-    public void addDetails() {
-
+    public void addDetails(ArrayList<String> tags) {
+                currentRecipe.addDetails(tags);
     }
 
     public void addInfo() {
@@ -162,9 +163,10 @@ public class InstructionManager {
 
     }
 
-    public void extractPreparation(String title) {
-
-        currentRecipe = new Recipe();
+    public void extractPreparation(int id, String title) {
+        //currentRecipe = new Preparation(groupedSteps.getSteps(),title, groupedSteps.getIngredients());
+        currentRecipe = currentRecipe.extractPreparation(title,id);
+        //notifyKitchenSheetCreated(new KitchenSheet("ciao", new ServiceInfo("cio")));
     }
 
     public ObservableList<Instruction> getInstructions() {

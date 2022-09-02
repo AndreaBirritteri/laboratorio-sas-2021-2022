@@ -26,6 +26,11 @@ public abstract class Instruction {
     protected boolean published;
     protected int minutes;
 
+    protected int minutes2;
+
+    protected int minutes3;
+
+
     @Override
     public String toString() {
         return title;
@@ -161,7 +166,7 @@ public abstract class Instruction {
 */
 
     public void defineSection(String name) {
-
+            this.groupedSteps.add(new GroupedSteps(name));
     }
 
     public void deleteSection(String name) {
@@ -197,8 +202,8 @@ public abstract class Instruction {
     }
 
 
-    public void addDetails() {
-
+    public void addDetails(ArrayList<String> tags) {
+        this.tags = tags;
     }
 
     public void addInfo() {
@@ -240,14 +245,18 @@ public abstract class Instruction {
     }
 
 
-    public void extractPreparation(String title) {
-        new Preparation(groupedSteps.get(3).getSteps(), title, groupedSteps.get(3).getIngredients());
+    public Preparation extractPreparation(String title,int idGroup) {
+        Preparation c = new Preparation();
+        c.setTitle(title);
+        c.setSteps(groupedSteps.get(idGroup).getSteps());
+        c.setIngredients(groupedSteps.get(idGroup).getIngredients());
 
+        return c;
 
     }
 
-    public void editRepetitionRule(String s) {
-        groupedSteps.get(3).setReceptionRule(s);
+    public void editRepetitionRule(String s, int idGroup) {
+        groupedSteps.get(idGroup).setReceptionRule(s);
     }
 
 
