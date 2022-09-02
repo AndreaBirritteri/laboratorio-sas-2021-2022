@@ -1,5 +1,7 @@
 package persistence;
 
+import businesslogic.UseCaseLogicException;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 

@@ -8,6 +8,7 @@ import businesslogic.kitchentask.KitchenSheet;
 import businesslogic.kitchentask.KitchenTask;
 import businesslogic.preparation.Recipe;
 import businesslogic.shift.Shift;
+import businesslogic.user.Cook;
 import businesslogic.user.User;
 
 public class TestKitchenTask1a {
@@ -28,7 +29,9 @@ public class TestKitchenTask1a {
 
             System.out.println("\nTEST OPEN EXISTING SHEET");
             KitchenSheet sheetToOpen = new KitchenSheet("Convegno Agile Community", service);
-            KitchenSheet sheet = catERing.getKitchenTaskManager().chooseKitchenSheet(sheetToOpen, event, service);
+            //KitchenSheet sheet = catERing.getKitchenTaskManager().createKitchenSheet(sheetToOpen.getTitle(), event, service);
+            System.out.println(service.getId());
+            KitchenSheet sheet  = catERing.getKitchenTaskManager().chooseKitchenSheet(sheetToOpen, event, service);
             System.out.println("Foglio esistente per servizio \"" + service.getName() + "\" associato all'evento \"" + event.getName() + "\": " + sheet);
 
             System.out.println("\nTEST ADD KITCHEN TASK");
@@ -61,7 +64,7 @@ public class TestKitchenTask1a {
             int quantity = 6;
             firstTask = sheet.getKitchenTasks().get(firstPosition);
             System.out.printf("Assegniamo al primo task il cuoco: %s, nel turno: %s, con durata: %s e quantita': %s%n", cookMarinella.getUserName(), tuesdayAfternoonShift.getDatetime(), minutes, quantity);
-            catERing.getKitchenTaskManager().assignTask(firstTask, tuesdayAfternoonShift, cookMarinella, minutes, quantity);
+            catERing.getKitchenTaskManager().assignTask(firstTask, tuesdayAfternoonShift, cookMarinella.asCook(), minutes, quantity);
             System.out.println("Foglio con primo task assegnato: " + sheet);
 
             System.out.println("\nTEST SET FIRST TASK COMPLETED");

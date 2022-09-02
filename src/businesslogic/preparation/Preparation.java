@@ -8,6 +8,9 @@ public class Preparation extends Instruction implements AbstractIngredient {
     String title;
     ArrayList<Ingredient> ingredients;
 
+    public Preparation(String title){
+        this.title = title;
+    }
 
     public Preparation(ArrayList<String> steps) {
         super();

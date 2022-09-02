@@ -7,6 +7,8 @@ import businesslogic.event.EventInfo;
 import businesslogic.event.ServiceInfo;
 import businesslogic.preparation.Instruction;
 import businesslogic.shift.Shift;
+import businesslogic.user.Chef;
+import businesslogic.user.Cook;
 import businesslogic.user.User;
 
 import java.util.ArrayList;
@@ -69,7 +71,7 @@ public class KitchenTaskManager {
         KitchenSheet kitchenSheet;
         User user = CatERing.getInstance().getUserManager().getCurrentUser();
 
-        if (!user.isChef() ||
+        if (!user.isRole(User.Role.CHEF) ||
                 !event.getServices().contains(service) ||
                 service.getMenu() == null ||
                 !user.getAssignedEvents().contains(event)) {
@@ -100,7 +102,7 @@ public class KitchenTaskManager {
     public KitchenSheet chooseKitchenSheet(KitchenSheet sheet, EventInfo event, ServiceInfo service)
             throws UseCaseLogicException, BusinessLogicException {
         User user = CatERing.getInstance().getUserManager().getCurrentUser();
-        if (!user.isChef() ||
+        if (!user.isRole(User.Role.CHEF) ||
                 !event.getServices().contains(service) ||
                 !user.getAssignedEvents().contains(event) ||
                 service.getMenu() == null) {
@@ -144,13 +146,14 @@ public class KitchenTaskManager {
         } else if (toPosition < 0 || toPosition >= currentKitchenSheet.getKitchenTasks().size()) {
             throw new IllegalArgumentException();
         } else {
+            currentKitchenSheet.moveTask(task, toPosition);
             this.notifyKitchenTasksRearranged(currentKitchenSheet);
         }
     }
 
-    public void assignTask(KitchenTask task, Shift shift, User user, int minutes, int quantity) throws UseCaseLogicException {
+    public void assignTask(KitchenTask task, Shift shift, Cook user, int minutes, int quantity) throws UseCaseLogicException {
         if (currentKitchenSheet != null && currentKitchenSheet.getKitchenTasks().contains(task)) {
-            task.assign(shift, user, minutes, quantity);
+            currentKitchenSheet.assignTask(task, shift, user, minutes, quantity);
             notifyKitchenTaskAssigned(task);
         } else {
             throw new UseCaseLogicException();

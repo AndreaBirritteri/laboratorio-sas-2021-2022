@@ -79,16 +79,17 @@ public class Menu {
 
     }
 
-    public ArrayList<Instruction> getRecipes(){
+    public ArrayList<Recipe> getRecipes(){
 
         ArrayList<MenuItem> items = new ArrayList<>(freeItems);
         for(Section section: sections){
             items.addAll(section.getItems());
         }
 
-        ArrayList<Instruction> recipes = new ArrayList<>();
+        ArrayList<Recipe> recipes = new ArrayList<>();
         for(MenuItem item: items){
-            recipes.add(item.getItemRecipe());
+            if(item.getItemRecipe() instanceof Recipe)
+                recipes.add((Recipe) item.getItemRecipe());
         }
 
         return recipes;

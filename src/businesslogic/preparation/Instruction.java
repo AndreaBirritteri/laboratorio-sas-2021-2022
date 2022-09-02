@@ -98,15 +98,25 @@ public abstract class Instruction {
         String query = "SELECT * FROM Instructions";
         PersistenceManager.executeQuery(query, new ResultHandler() {
             @Override
-            public void handle(ResultSet rs) throws SQLException {
-                int id = rs.getInt("id");
+            public void handle(ResultSet res) throws SQLException {
+                int id = res.getInt("id");
+                String title = res.getString("title");
+                String instructionType = res.getString("instruction_type");
                 if (all.containsKey(id)) {
-                    Instruction rec = all.get(id);
-                    rec.title = rs.getString("title");
+                    Instruction instruction = all.get(id);
+                    instruction.title = title;
                 } else {
-                    Instruction rec = new Recipe(rs.getString("title"));
-                    rec.id = id;
-                    all.put(rec.id, rec);
+                    Instruction instruction;
+                    if(Objects.equals(instructionType, "r")){
+                        instruction = new Recipe(title);
+                    }else if(Objects.equals(instructionType, "p")){
+                        instruction = new Preparation(title);
+                    }else{
+                        throw new IllegalArgumentException();
+                    }
+
+                    instruction.id = id;
+                    all.put(instruction.id, instruction);
                 }
             }
         });
@@ -124,7 +134,7 @@ public abstract class Instruction {
         return FXCollections.observableArrayList(all.values());
     }
 
-    public static ArrayList<Instruction> getInstructionsOfRecipes(ArrayList<Instruction> recipes) {
+    public static ArrayList<Instruction> getInstructionsOfRecipes(ArrayList<Recipe> recipes) {
         ArrayList<Instruction> procedures = new ArrayList<>(recipes);
 
         for (Instruction recipe: recipes){

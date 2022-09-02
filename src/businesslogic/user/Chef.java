@@ -1,10 +1,10 @@
 package businesslogic.user;
 
 public class Chef extends User {
-    Chef() throws Exception {
+    public Chef() throws Exception {
         super();
 
-        if (!this.isChef()) {
+        if (!this.isRole(Role.CHEF)) {
             throw new Exception("Is not a chef");
         }
     }
