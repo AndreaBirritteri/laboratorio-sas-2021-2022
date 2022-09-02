@@ -133,7 +133,7 @@ public class KitchenSheet {
     public static void saveNewSheet(KitchenSheet sheet) {
         String sheetInsert = "INSERT INTO catering.KitchenSheets (title, service_id) VALUES (" +
                 "'" + PersistenceManager.escapeString(sheet.title) + "', " +
-                sheet.id +
+                sheet.service.getId() +
                 ");";
         PersistenceManager.executeUpdate(sheetInsert);
         sheet.id = PersistenceManager.getLastId();

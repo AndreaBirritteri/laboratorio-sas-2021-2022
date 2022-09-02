@@ -81,6 +81,8 @@ public class User {
                 result += r.toString() + " ";
             }
         }
+
+        result += " id: " + id;
         return result;
     }
 
