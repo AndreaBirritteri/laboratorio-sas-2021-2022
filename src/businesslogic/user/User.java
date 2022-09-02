@@ -15,9 +15,12 @@ public class User {
 
     protected static Map<Integer, User> loadedUsers = FXCollections.observableHashMap();
 
-    public static enum Role {SERVIZIO, CUOCO, CHEF, ORGANIZZATORE}
-
-    ;
+    public static enum Role {
+        SERVIZIO,
+        CUOCO,
+        CHEF,
+        ORGANIZZATORE
+    }
 
     protected int id;
     protected String username;
@@ -33,7 +36,7 @@ public class User {
         assignedEvents = new ArrayList<>();
     }
 
-    public Cook asCook(){
+    public Cook asCook() {
         if (this.isRole(Role.CUOCO)) {
             Cook cook = new Cook();
             cook.id = this.id;
@@ -42,8 +45,7 @@ public class User {
             cook.availableForShifts = this.availableForShifts;
             cook.assignedEvents = this.assignedEvents;
             return cook;
-        }
-        else{
+        } else {
             return null;
         }
     }
