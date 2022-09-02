@@ -1,11 +1,13 @@
 package businesslogic.kitchentask;
 
 import businesslogic.BusinessLogicException;
+import businesslogic.UseCaseLogicException;
 import businesslogic.event.ServiceInfo;
 import businesslogic.menu.Menu;
 import businesslogic.preparation.Instruction;
 import businesslogic.shift.Shift;
 import businesslogic.user.Cook;
+import businesslogic.user.User;
 import org.apache.commons.lang3.NotImplementedException;
 import persistence.PersistenceManager;
 
@@ -104,7 +106,7 @@ public class KitchenSheet {
     }
 
     public void restoreOriginalTasks() {
-        //todo check if it works
+        kitchenTasks.clear();
         Menu menu = service.getMenu();
         ArrayList<Instruction> recipes = menu.getRecipes();
         List<Instruction> instructions = Instruction.getInstructionsOfRecipes(recipes);
@@ -119,7 +121,7 @@ public class KitchenSheet {
         kitchenTasks.add(position, kitchenTask);
     }
 
-    public void assignTask(KitchenTask kitchenTask, Shift shift, Cook cook, int minutes, int quantity) throws Exception {
+    public void assignTask(KitchenTask kitchenTask, Shift shift, User cook, int minutes, int quantity) throws UseCaseLogicException {
         kitchenTasks.get(kitchenTasks.indexOf(kitchenTask)).assign(shift, cook, minutes, quantity);
     }
 
@@ -160,7 +162,7 @@ public class KitchenSheet {
     }
 
     public static void restoreSheet(KitchenSheet sheet) {
-        //KitchenTask.deleteAllTasks(sheet);
-        //KitchenTask.addAllTasks(sheet);
+        KitchenTask.deleteAllTasks(sheet);
+        KitchenTask.addAllTasks(sheet);
     }
 }

@@ -1,5 +1,6 @@
 package businesslogic.user;
 
+import businesslogic.UseCaseLogicException;
 import businesslogic.event.EventInfo;
 import businesslogic.shift.Shift;
 import javafx.collections.FXCollections;
@@ -12,15 +13,17 @@ import java.util.*;
 
 public class User {
 
-    private static Map<Integer, User> loadedUsers = FXCollections.observableHashMap();
+    protected static Map<Integer, User> loadedUsers = FXCollections.observableHashMap();
 
-    public static enum Role {SERVIZIO, CUOCO, CHEF, ORGANIZZATORE};
+    public static enum Role {SERVIZIO, CUOCO, CHEF, ORGANIZZATORE}
 
-    private int id;
-    private String username;
-    private Set<Role> roles;
-    private ArrayList<Shift> availableForShifts;
-    private ArrayList<EventInfo> assignedEvents;
+    ;
+
+    protected int id;
+    protected String username;
+    protected Set<Role> roles;
+    protected ArrayList<Shift> availableForShifts;
+    protected ArrayList<EventInfo> assignedEvents;
 
     public User() {
         id = 0;
@@ -30,8 +33,23 @@ public class User {
         assignedEvents = new ArrayList<>();
     }
 
-    public boolean isChef() {
-        return roles.contains(Role.CHEF);
+    public Cook asCook() throws UseCaseLogicException {
+        if (this.isRole(Role.CUOCO)) {
+            Cook cook = new Cook();
+            cook.id = this.id;
+            cook.username = this.username;
+            cook.roles = this.roles;
+            cook.availableForShifts = this.availableForShifts;
+            cook.assignedEvents = this.assignedEvents;
+            return cook;
+        }
+        else{
+            throw new UseCaseLogicException();
+        }
+    }
+
+    public boolean isRole(Role role) {
+        return roles.contains(role);
     }
 
     public ArrayList<EventInfo> getAssignedEvents() {
@@ -42,7 +60,7 @@ public class User {
         availableForShifts.add(shift);
     }
 
-    public boolean isAvailableFor(Shift shift){
+    public boolean isAvailableFor(Shift shift) {
         return availableForShifts.contains(shift);
     }
 
@@ -72,7 +90,7 @@ public class User {
         if (loadedUsers.containsKey(uid)) return loadedUsers.get(uid);
 
         User load = new User();
-        String userQuery = "SELECT * FROM Users WHERE id='"+uid+"'";
+        String userQuery = "SELECT * FROM Users WHERE id='" + uid + "'";
         PersistenceManager.executeQuery(userQuery, new ResultHandler() {
             @Override
             public void handle(ResultSet rs) throws SQLException {
@@ -108,7 +126,7 @@ public class User {
 
     public static User loadUser(String username) {
         User u = new User();
-        String userQuery = "SELECT * FROM Users JOIN Events ON chef_id = Users.id WHERE username='"+username+"'";
+        String userQuery = "SELECT * FROM Users JOIN Events ON chef_id = Users.id WHERE username='" + username + "'";
         PersistenceManager.executeQuery(userQuery, new ResultHandler() {
             @Override
             public void handle(ResultSet rs) throws SQLException {

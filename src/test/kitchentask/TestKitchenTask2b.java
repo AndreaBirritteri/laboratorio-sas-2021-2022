@@ -28,17 +28,15 @@ public class TestKitchenTask2b {
 
             System.out.println("\nTEST ADD KITCHEN TASK");
             ObservableList<Instruction> recipes = CatERing.getInstance().getInstructionManager().getInstructions();
-            KitchenTask preparePaniniLatte = catERing.getKitchenTaskManager().addKitchenTask(recipes.get(11));
-            KitchenTask prepareBigneFarciti = catERing.getKitchenTaskManager().addKitchenTask(recipes.get(14));
-            KitchenTask preparePizzette = catERing.getKitchenTaskManager().addKitchenTask(recipes.get(15));
-            System.out.println("Foglio con nuovi tasks: \"Panini al latte\", \"Bigne farciti\", \"Pizzette\"" + sheet);
+            KitchenTask task1 = catERing.getKitchenTaskManager().addKitchenTask(recipes.get(11));
+            KitchenTask task2 = catERing.getKitchenTaskManager().addKitchenTask(recipes.get(14));
+            KitchenTask task3 = catERing.getKitchenTaskManager().addKitchenTask(recipes.get(15));
+            System.out.printf("Foglio con nuovi tasks: \"%s\", \"%s\", \"%s\" %s", task1, task2, task3, sheet);
 
             System.out.println("\nTEST DELETE KITCHEN TASK");
-            catERing.getKitchenTaskManager().deleteKitchenTask(prepareBigneFarciti);
-//            catERing.getKitchenTaskManager().deleteKitchenTask(preparePizzette); //commentare per vedere che resta aggiunto nel db
-            catERing.getKitchenTaskManager().deleteKitchenTask(preparePaniniLatte);
-//			System.out.println("Foglio con tasks \"Panini al latte\", \"Bigne farciti\", \"Pizzette\" rimossi: "+sheet);
-            System.out.println("Foglio con tasks \"Panini al latte\", \"Bigne farciti\" rimossi: "+sheet); //pizzette rimaste
+            catERing.getKitchenTaskManager().deleteKitchenTask(task1);
+            catERing.getKitchenTaskManager().deleteKitchenTask(task3);
+            System.out.printf("Foglio con rimossi tasks: \"%s\", \"%s\", %s", task1,  task3, sheet);
 
 
             System.out.println("\nTEST RESTORE KITCHEN TASK");
