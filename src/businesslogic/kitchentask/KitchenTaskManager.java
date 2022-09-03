@@ -7,7 +7,6 @@ import businesslogic.event.EventInfo;
 import businesslogic.event.ServiceInfo;
 import businesslogic.preparation.Instruction;
 import businesslogic.shift.Shift;
-import businesslogic.user.Chef;
 import businesslogic.user.Cook;
 import businesslogic.user.User;
 
@@ -154,18 +153,22 @@ public class KitchenTaskManager {
     public void assignTask(KitchenTask task, Shift shift, Cook user, int minutes, int quantity) throws UseCaseLogicException {
         if (currentKitchenSheet != null && currentKitchenSheet.getKitchenTasks().contains(task)) {
             currentKitchenSheet.assignTask(task, shift, user, minutes, quantity);
-            notifyKitchenTaskAssigned(task);
+            this.notifyKitchenTaskAssigned(task);
         } else {
             throw new UseCaseLogicException();
         }
     }
 
-    public void specifyTaskCompleted(KitchenTask task, boolean isCompleted) throws UseCaseLogicException {
-        if (currentKitchenSheet != null && currentKitchenSheet.getKitchenTasks().contains(task)) {
+    public void specifyTaskComplete(KitchenTask task) throws UseCaseLogicException {
+        specifyTaskCompleteness(task, true);
+    }
+
+    public void specifyTaskCompleteness(KitchenTask task, boolean isCompleted) throws UseCaseLogicException {
+        if (currentKitchenSheet == null || !currentKitchenSheet.getKitchenTasks().contains(task)) {
+            throw new UseCaseLogicException();
+        } else {
             currentKitchenSheet.setKitchenTaskCompleted(task, isCompleted);
             notifyKitchenTaskCompletedChanged(task);
-        } else {
-            throw new UseCaseLogicException();
         }
     }
 }

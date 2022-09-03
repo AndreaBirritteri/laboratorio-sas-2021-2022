@@ -41,13 +41,14 @@ public class KitchenTask {
     }
 
     void assign(Shift shift, Cook cook, int minutes, int quantity) throws UseCaseLogicException {
-        if (cook !=null && !cook.isAvailableFor(shift))
+        if ((shift != null && shift.isCompleted()) || (cook != null && !cook.isAvailableFor(shift))) {
             throw new UseCaseLogicException();
-
-        this.shift = shift;
-        this.cook = cook;
-        this.minutes = minutes;
-        this.quantity = quantity;
+        } else {
+            this.shift = shift;
+            this.cook = cook;
+            this.minutes = minutes;
+            this.quantity = quantity;
+        }
     }
 
     void setCompleted(boolean isCompleted) {

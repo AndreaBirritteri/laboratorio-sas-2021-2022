@@ -8,7 +8,6 @@ import businesslogic.kitchentask.KitchenSheet;
 import businesslogic.kitchentask.KitchenTask;
 import businesslogic.preparation.Recipe;
 import businesslogic.shift.Shift;
-import businesslogic.user.Cook;
 import businesslogic.user.User;
 
 public class TestKitchenTask1a {
@@ -68,7 +67,7 @@ public class TestKitchenTask1a {
             System.out.println("Foglio con primo task assegnato: " + sheet);
 
             System.out.println("\nTEST SET FIRST TASK COMPLETED");
-            catERing.getKitchenTaskManager().specifyTaskCompleted(firstTask, true);
+            catERing.getKitchenTaskManager().specifyTaskCompleteness(firstTask, true);
             System.out.println("Foglio con primo task completato: " + sheet);
 
         } catch (Exception e) {

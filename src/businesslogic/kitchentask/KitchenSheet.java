@@ -57,6 +57,7 @@ public class KitchenSheet {
 
     public KitchenTask addKitchenTask(Instruction instruction) {
         KitchenTask kitchenTask = new KitchenTask(instruction);
+        instruction.addAssignedTask(kitchenTask);
         kitchenTasks.add(kitchenTask);
         return kitchenTask;
     }
@@ -103,6 +104,7 @@ public class KitchenSheet {
     }
 
     public void deleteKitchenTask(KitchenTask kitchenTask) {
+        kitchenTask.getInstruction().removeAssignedTask(kitchenTask);
         kitchenTasks.remove(kitchenTask);
     }
 

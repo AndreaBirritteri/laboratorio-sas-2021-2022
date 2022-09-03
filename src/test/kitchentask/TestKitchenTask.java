@@ -85,7 +85,7 @@ public class TestKitchenTask {
             System.out.println("Foglio con primi tre tasks assegnati: " + sheet);
 
             System.out.println("\nTEST SET FIRST TASK COMPLETED");
-            catERing.getKitchenTaskManager().specifyTaskCompleted(firstTask, true);
+            catERing.getKitchenTaskManager().specifyTaskCompleteness(firstTask, true);
             System.out.println("Foglio con primo task completato: " + sheet);
 
         } catch (UseCaseLogicException e) {
