@@ -159,10 +159,6 @@ public class KitchenTaskManager {
         }
     }
 
-    public void specifyTaskComplete(KitchenTask task) throws UseCaseLogicException {
-        specifyTaskCompleteness(task, true);
-    }
-
     public void specifyTaskCompleteness(KitchenTask task, boolean isCompleted) throws UseCaseLogicException {
         if (currentKitchenSheet == null || !currentKitchenSheet.getKitchenTasks().contains(task)) {
             throw new UseCaseLogicException();
