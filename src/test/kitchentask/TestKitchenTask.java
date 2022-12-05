@@ -7,7 +7,7 @@ import businesslogic.event.EventInfo;
 import businesslogic.event.ServiceInfo;
 import businesslogic.kitchentask.KitchenSheet;
 import businesslogic.kitchentask.KitchenTask;
-import businesslogic.preparation.Instruction;
+import businesslogic.preparation.Procedure;
 import businesslogic.shift.Shift;
 import businesslogic.user.User;
 
@@ -35,7 +35,7 @@ public class TestKitchenTask {
             System.out.println("Foglio autogenerato per servizio \"" + service.getName() + "\" associato all'evento \"" + event.getName() + "\": " + sheet);
 
             System.out.println("\nTEST ADD KITCHEN TASK");
-            List<Instruction> recipes = CatERing.getInstance().getInstructionManager().getInstructions();
+            List<Procedure> recipes = CatERing.getInstance().getInstructionManager().getInstructions();
 
             KitchenTask task1 = catERing.getKitchenTaskManager().addKitchenTask(recipes.get(10));
             KitchenTask task2 = catERing.getKitchenTaskManager().addKitchenTask(recipes.get(14));

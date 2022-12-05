@@ -3,7 +3,7 @@ package businesslogic;
 import businesslogic.event.EventManager;
 import businesslogic.kitchentask.KitchenTaskManager;
 import businesslogic.menu.MenuManager;
-import businesslogic.preparation.InstructionManager;
+import businesslogic.preparation.ProcedureManager;
 import businesslogic.shift.ShiftManager;
 import businesslogic.user.UserManager;
 import persistence.KitchenTaskEventPersistence;
@@ -20,7 +20,7 @@ public class CatERing {
     }
 
     private MenuManager menuMgr;
-    private InstructionManager instructionManager;
+    private ProcedureManager procedureManager;
     private UserManager userMgr;
     private EventManager eventMgr;
     private KitchenTaskManager kitchenTaskMgr;
@@ -31,7 +31,7 @@ public class CatERing {
 
     private CatERing() {
         menuMgr = new MenuManager();
-        instructionManager = new InstructionManager();
+        procedureManager = new ProcedureManager();
         userMgr = new UserManager();
         eventMgr = new EventManager();
         kitchenTaskMgr = new KitchenTaskManager();
@@ -49,8 +49,8 @@ public class CatERing {
         return menuMgr;
     }
 
-    public InstructionManager getInstructionManager() {
-        return instructionManager;
+    public ProcedureManager getInstructionManager() {
+        return procedureManager;
     }
 
     public UserManager getUserManager() {

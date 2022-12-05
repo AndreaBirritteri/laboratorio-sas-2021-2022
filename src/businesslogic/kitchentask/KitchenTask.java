@@ -1,7 +1,7 @@
 package businesslogic.kitchentask;
 
 import businesslogic.UseCaseLogicException;
-import businesslogic.preparation.Instruction;
+import businesslogic.preparation.Procedure;
 import businesslogic.preparation.Recipe;
 import businesslogic.shift.Shift;
 import businesslogic.user.Cook;
@@ -14,7 +14,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class KitchenTask {
-    private final Instruction instruction;
+    private final Procedure procedure;
     private Shift shift;
     private Cook cook;
     private int minutes;
@@ -22,15 +22,15 @@ public class KitchenTask {
     private boolean isCompleted;
     int id;
 
-    KitchenTask(Instruction instruction) {
-        this.instruction = instruction;
+    KitchenTask(Procedure procedure) {
+        this.procedure = procedure;
         this.isCompleted = false;
     }
 
     @Override
     public String toString() {
         return "KitchenTask{" +
-                "procedure=" + instruction +
+                "procedure=" + procedure +
                 ", shift=" + shift +
                 ", cook=" + cook +
                 ", minutes=" + minutes +
@@ -59,8 +59,8 @@ public class KitchenTask {
         return isCompleted;
     }
 
-    public Instruction getInstruction() {
-        return instruction;
+    public Procedure getInstruction() {
+        return procedure;
     }
 
     public Shift getShift() {
@@ -86,8 +86,8 @@ public class KitchenTask {
         PersistenceManager.executeQuery(query, new ResultHandler() {
             @Override
             public void handle(ResultSet rs) throws SQLException {
-                Instruction instruction = Recipe.loadRecipeById(rs.getInt("procedure_id"));
-                KitchenTask task = new KitchenTask(instruction);
+                Procedure procedure = Recipe.loadRecipeById(rs.getInt("procedure_id"));
+                KitchenTask task = new KitchenTask(procedure);
                 task.id = rs.getInt("id");
                 task.minutes = rs.getInt("minutes");
                 task.quantity = rs.getInt("quantity");

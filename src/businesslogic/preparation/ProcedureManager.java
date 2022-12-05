@@ -1,6 +1,5 @@
 package businesslogic.preparation;
 
-import businesslogic.event.ServiceInfo;
 import businesslogic.kitchentask.KitchenSheet;
 import businesslogic.kitchentask.KitchenTask;
 import businesslogic.kitchentask.KitchenTaskEventReceiver;
@@ -9,16 +8,16 @@ import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
 
-public class InstructionManager {
+public class ProcedureManager {
 
     ArrayList<KitchenTaskEventReceiver> eventReceivers = new ArrayList<>();
 
-    public InstructionManager() {
+    public ProcedureManager() {
         Recipe.loadAllInstructions();
     }
 
 
-    private Instruction currentRecipe;
+    private Procedure currentRecipe;
 
 
     public void addEventReceiver(KitchenTaskEventReceiver kitchenTaskEventReceiver) {
@@ -89,7 +88,7 @@ public class InstructionManager {
     }
 
 
-    public void deleteProcedure(Instruction instruction) {
+    public void deleteProcedure(Procedure procedure) {
         currentRecipe.deleteRecipe();
     }
 /*
@@ -97,11 +96,11 @@ public class InstructionManager {
             currentRecipe.editRecipe();
     }*/
 
-    public void copyProcedure(Instruction instruction) {
+    public void copyProcedure(Procedure procedure) {
 
     }
 
-    public void unpublishProcedure(Instruction instruction) {
+    public void unpublishProcedure(Procedure procedure) {
 
     }
 
@@ -169,8 +168,8 @@ public class InstructionManager {
         //notifyKitchenSheetCreated(new KitchenSheet("ciao", new ServiceInfo("cio")));
     }
 
-    public ObservableList<Instruction> getInstructions() {
-        return FXCollections.unmodifiableObservableList(Instruction.getAllInstruction());
+    public ObservableList<Procedure> getInstructions() {
+        return FXCollections.unmodifiableObservableList(Procedure.getAllInstruction());
     }
 
     public ObservableList<Recipe> getRecipes() {

@@ -2,11 +2,11 @@ package businesslogic.preparation;
 
 import java.util.ArrayList;
 
-public class Preparation extends Instruction implements AbstractIngredient {
+public class Preparation extends Procedure implements Ingredient {
 
     ArrayList<String> steps;
     String title;
-    ArrayList<Ingredient> ingredients;
+    ArrayList<Dose> doses;
 
     public Preparation(String title){
         this.title = title;
@@ -20,10 +20,10 @@ public class Preparation extends Instruction implements AbstractIngredient {
 
 
 
-    public Preparation(ArrayList<String> steps, String title, ArrayList<Ingredient> ingredients) {
+    public Preparation(ArrayList<String> steps, String title, ArrayList<Dose> doses) {
         this.steps = steps;
         this.title = title;
-        this.ingredients = ingredients;
+        this.doses = doses;
 
     }
 
@@ -45,12 +45,12 @@ public class Preparation extends Instruction implements AbstractIngredient {
     }
 
     @Override
-    public ArrayList<Ingredient> getIngredients() {
-        ingredients.toArray().toString();
-        return ingredients;
+    public ArrayList<Dose> getIngredients() {
+        doses.toArray().toString();
+        return doses;
     }
 
-    public void setIngredients(ArrayList<Ingredient> ingredients) {
-        this.ingredients = ingredients;
+    public void setIngredients(ArrayList<Dose> doses) {
+        this.doses = doses;
     }
 }

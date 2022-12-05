@@ -4,12 +4,10 @@ import businesslogic.BusinessLogicException;
 import businesslogic.UseCaseLogicException;
 import businesslogic.event.ServiceInfo;
 import businesslogic.menu.Menu;
-import businesslogic.preparation.Instruction;
+import businesslogic.preparation.Procedure;
 import businesslogic.preparation.Recipe;
 import businesslogic.shift.Shift;
 import businesslogic.user.Cook;
-import businesslogic.user.User;
-import org.apache.commons.lang3.NotImplementedException;
 import persistence.PersistenceManager;
 
 import java.util.ArrayList;
@@ -55,9 +53,9 @@ public class KitchenSheet {
         return Objects.hash(id);
     }
 
-    public KitchenTask addKitchenTask(Instruction instruction) {
-        KitchenTask kitchenTask = new KitchenTask(instruction);
-        instruction.addAssignedTask(kitchenTask);
+    public KitchenTask addKitchenTask(Procedure procedure) {
+        KitchenTask kitchenTask = new KitchenTask(procedure);
+        procedure.addAssignedTask(kitchenTask);
         kitchenTasks.add(kitchenTask);
         return kitchenTask;
     }
@@ -112,9 +110,9 @@ public class KitchenSheet {
         kitchenTasks.clear();
         Menu menu = service.getMenu();
         ArrayList<Recipe> recipes = menu.getRecipes();
-        List<Instruction> instructions = Instruction.getInstructionsOfRecipes(recipes);
-        for (Instruction instruction : instructions) {
-            KitchenTask task = new KitchenTask(instruction);
+        List<Procedure> procedures = Procedure.getInstructionsOfRecipes(recipes);
+        for (Procedure procedure : procedures) {
+            KitchenTask task = new KitchenTask(procedure);
             kitchenTasks.add(task);
         }
     }

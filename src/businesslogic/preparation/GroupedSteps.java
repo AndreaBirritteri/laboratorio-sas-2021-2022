@@ -11,7 +11,7 @@ public class GroupedSteps {
     private ArrayList<String> steps;
     private String receptionRule;
     private boolean inAdvance;
-    private ArrayList<Ingredient> ingredients;
+    private ArrayList<Dose> doses;
 
 
     public GroupedSteps() {
@@ -48,11 +48,11 @@ public class GroupedSteps {
         this.inAdvance = inAdvance;
     }
 
-    public ArrayList<Ingredient> getIngredients() {
-        return ingredients;
+    public ArrayList<Dose> getIngredients() {
+        return doses;
     }
 
-    public void setIngredients(Ingredient ingredient) {
-        ingredients.add(ingredient);
+    public void setIngredients(Dose dose) {
+        doses.add(dose);
     }
 }

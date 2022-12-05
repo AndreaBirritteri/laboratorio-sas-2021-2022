@@ -7,7 +7,7 @@ import businesslogic.event.EventInfo;
 import businesslogic.event.ServiceInfo;
 import businesslogic.kitchentask.KitchenSheet;
 import businesslogic.kitchentask.KitchenTask;
-import businesslogic.preparation.Instruction;
+import businesslogic.preparation.Procedure;
 import javafx.collections.ObservableList;
 
 public class TestKitchenTask2b {
@@ -27,7 +27,7 @@ public class TestKitchenTask2b {
             System.out.println("Foglio autogenerato per servizio \"" + service.getName() + "\" associato all'evento \"" + event.getName() + "\": " + sheet);
 
             System.out.println("\nTEST ADD KITCHEN TASK");
-            ObservableList<Instruction> recipes = CatERing.getInstance().getInstructionManager().getInstructions();
+            ObservableList<Procedure> recipes = CatERing.getInstance().getInstructionManager().getInstructions();
             KitchenTask task1 = catERing.getKitchenTaskManager().addKitchenTask(recipes.get(11));
             KitchenTask task2 = catERing.getKitchenTaskManager().addKitchenTask(recipes.get(14));
             KitchenTask task3 = catERing.getKitchenTaskManager().addKitchenTask(recipes.get(15));

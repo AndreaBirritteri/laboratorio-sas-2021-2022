@@ -1,7 +1,7 @@
 package businesslogic.menu;
 
 import businesslogic.CatERing;
-import businesslogic.preparation.Instruction;
+import businesslogic.preparation.Procedure;
 import businesslogic.preparation.Recipe;
 import businesslogic.user.User;
 import javafx.collections.FXCollections;
@@ -172,7 +172,7 @@ public class Menu {
         return sec;
     }
 
-    public MenuItem addItem(Instruction recipe, Section sec, String desc) {
+    public MenuItem addItem(Procedure recipe, Section sec, String desc) {
         MenuItem mi = new MenuItem(recipe, desc);
         if (sec != null) {
             sec.addItem(mi);

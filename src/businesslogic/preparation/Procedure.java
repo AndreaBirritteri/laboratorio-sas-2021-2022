@@ -10,8 +10,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 
-public abstract class Instruction {
-    protected static final Map<Integer, Instruction> all = new HashMap<>();
+public abstract class Procedure {
+    protected static final Map<Integer, Procedure> all = new HashMap<>();
 
     protected int id;
     protected final List<KitchenTask> assignedInTasks;
@@ -36,7 +36,7 @@ public abstract class Instruction {
         return title;
     }
 
-    public Instruction() {
+    public Procedure() {
         id = 0;
         this.assignedInTasks = new ArrayList<>();
         this.groupedSteps = new ArrayList<>();
@@ -47,14 +47,14 @@ public abstract class Instruction {
         return id;
     }
 
-    public ArrayList<Ingredient> getIngredients(){
-        ArrayList<Ingredient> ingredients = new ArrayList<>();
+    public ArrayList<Dose> getIngredients(){
+        ArrayList<Dose> doses = new ArrayList<>();
 
         for(GroupedSteps groupedStep: groupedSteps){
-            ingredients.addAll(groupedStep.getIngredients());
+            doses.addAll(groupedStep.getIngredients());
         }
 
-        return ingredients;
+        return doses;
     }
 
     public List<KitchenTask> getAssignedInTasks() {
@@ -94,7 +94,7 @@ public abstract class Instruction {
     }
 
 
-    public static ObservableList<Instruction> loadAllInstructions() {
+    public static ObservableList<Procedure> loadAllInstructions() {
         String query = "SELECT * FROM Instructions";
         PersistenceManager.executeQuery(query, new ResultHandler() {
             @Override
@@ -103,44 +103,44 @@ public abstract class Instruction {
                 String title = res.getString("title");
                 String instructionType = res.getString("instruction_type");
                 if (all.containsKey(id)) {
-                    Instruction instruction = all.get(id);
-                    instruction.title = title;
+                    Procedure procedure = all.get(id);
+                    procedure.title = title;
                 } else {
-                    Instruction instruction;
+                    Procedure procedure;
                     if(Objects.equals(instructionType, "r")){
-                        instruction = new Recipe(title);
+                        procedure = new Recipe(title);
                     }else if(Objects.equals(instructionType, "p")){
-                        instruction = new Preparation(title);
+                        procedure = new Preparation(title);
                     }else{
                         throw new IllegalArgumentException();
                     }
 
-                    instruction.id = id;
-                    all.put(instruction.id, instruction);
+                    procedure.id = id;
+                    all.put(procedure.id, procedure);
                 }
             }
         });
-        ObservableList<Instruction> res = FXCollections.observableArrayList(all.values());
-        res.sort(new Comparator<Instruction>() {
+        ObservableList<Procedure> res = FXCollections.observableArrayList(all.values());
+        res.sort(new Comparator<Procedure>() {
             @Override
-            public int compare(Instruction o1, Instruction o2) {
+            public int compare(Procedure o1, Procedure o2) {
                 return (o1.getTitle().compareTo(o2.getTitle()));
             }
         });
         return res;
     }
 
-    public static ObservableList<Instruction> getAllInstruction() {
+    public static ObservableList<Procedure> getAllInstruction() {
         return FXCollections.observableArrayList(all.values());
     }
 
-    public static ArrayList<Instruction> getInstructionsOfRecipes(ArrayList<Recipe> recipes) {
-        ArrayList<Instruction> procedures = new ArrayList<>(recipes);
+    public static ArrayList<Procedure> getInstructionsOfRecipes(ArrayList<Recipe> recipes) {
+        ArrayList<Procedure> procedures = new ArrayList<>(recipes);
 
-        for (Instruction recipe: recipes){
-            ArrayList <Ingredient> ingredientsRecipe = recipe.getIngredients();
+        for (Procedure recipe: recipes){
+            ArrayList <Dose> ingredientsRecipe = recipe.getIngredients();
             if (ingredientsRecipe != null){
-                for (AbstractIngredient ingredient: ingredientsRecipe){
+                for (Ingredient ingredient: ingredientsRecipe){
                     if (ingredient instanceof Preparation)
                         procedures.add((Preparation) ingredient);
                 }
@@ -151,11 +151,11 @@ public abstract class Instruction {
     }
 
 
-    public void addIngredientGroup(Ingredient ingredient) {
-        groupedSteps.get(1).setIngredients(ingredient);
+    public void addIngredientGroup(Dose dose) {
+        groupedSteps.get(1).setIngredients(dose);
     }
 
-    public List<Ingredient> getIngredientsGroup() {
+    public List<Dose> getIngredientsGroup() {
         return groupedSteps.get(1).getIngredients();
     }
 

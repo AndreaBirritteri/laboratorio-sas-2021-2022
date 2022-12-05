@@ -9,7 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 
-public class Recipe extends Instruction {
+public class Recipe extends Procedure {
     protected boolean published;
 
     public Recipe() {
@@ -43,15 +43,15 @@ public class Recipe extends Instruction {
     public static ObservableList<Recipe> getAllRecipes() {
         ArrayList<Recipe> recipes = new ArrayList<>();
 
-        for (Instruction instruction: all.values()){
-            if(instruction instanceof Recipe)
-                recipes.add((Recipe) instruction);
+        for (Procedure procedure : all.values()){
+            if(procedure instanceof Recipe)
+                recipes.add((Recipe) procedure);
         }
         return FXCollections.observableArrayList(recipes);
     }
 
 
-    public void unpublishProcedure(Instruction instruction) {
+    public void unpublishProcedure(Procedure procedure) {
 
     }
 
