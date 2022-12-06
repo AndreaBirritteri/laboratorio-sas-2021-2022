@@ -112,7 +112,7 @@ INSERT INTO `KitchenSheets` (`id`, `title`, `service_id`) VALUES
 CREATE TABLE `KitchenTasks` (
   `id` int(11) NOT NULL,
   `position` int(11) DEFAULT NULL,
-  `minutes` int(11) DEFAULT NULL,
+  `minutes1` int(11) DEFAULT NULL,
   `quantity` int(11) DEFAULT NULL,
   `completed` int(11) DEFAULT NULL,
   `shift_when` char(64) DEFAULT NULL,
@@ -125,7 +125,7 @@ CREATE TABLE `KitchenTasks` (
 -- Dumping data for table `KitchenTasks`
 --
 
-INSERT INTO `KitchenTasks` (`id`, `position`, `minutes`, `quantity`, `completed`, `shift_when`, `cook_id`, `kitchen_sheet_id`, `preparation_id`) VALUES
+INSERT INTO `KitchenTasks` (`id`, `position`, `minutes1`, `quantity`, `completed`, `shift_when`, `cook_id`, `kitchen_sheet_id`, `preparation_id`) VALUES
 (382, 0, 50, 6, 1, 'Giovedi ore 16:00', 4, 23, 3),
 (383, 1, 50, 6, 0, 'Giovedi ore 16:00', NULL, 23, 3),
 (384, 2, 0, 0, 0, 'Giovedi ore 16:00', NULL, 23, 3),

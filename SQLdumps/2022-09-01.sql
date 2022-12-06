@@ -116,7 +116,7 @@ INSERT INTO `KitchenSheets` (`id`, `title`, `service_id`) VALUES
 CREATE TABLE `KitchenTasks` (
   `id` int(11) NOT NULL,
   `position` int(11) DEFAULT NULL,
-  `minutes` int(11) DEFAULT NULL,
+  `minutes1` int(11) DEFAULT NULL,
   `quantity` int(11) DEFAULT NULL,
   `completed` int(11) DEFAULT NULL,
   `shift_when` char(64) DEFAULT NULL,

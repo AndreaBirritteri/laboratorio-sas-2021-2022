@@ -14,9 +14,8 @@ public abstract class Procedure {
     protected static final Map<Integer, Procedure> all = new HashMap<>();
 
     protected int id;
-    protected final List<KitchenTask> assignedInTasks;
-    protected final List<GroupedSteps> groupedSteps;
-
+    protected List<KitchenTask> assignedInTasks;
+    protected List<GroupedSteps> groupedSteps;
     protected List<String> tags;
 
     protected String title;
@@ -24,7 +23,7 @@ public abstract class Procedure {
     protected String notes;
     protected String author;
     protected boolean published;
-    protected int minutes;
+    protected int minutes1;
 
     protected int minutes2;
 
@@ -89,8 +88,8 @@ public abstract class Procedure {
         return published;
     }
 
-    public int getMinutes() {
-        return minutes;
+    public int getMinutes1() {
+        return minutes1;
     }
 
 
@@ -259,7 +258,8 @@ public abstract class Procedure {
         Preparation c = new Preparation();
         c.setTitle(title);
         c.setSteps(groupedSteps.get(idGroup).getSteps());
-        c.setIngredients(groupedSteps.get(idGroup).getIngredients());
+        c.groupedSteps.add(new GroupedSteps());
+        c.setIngredients(c.groupedSteps.get(0), this.groupedSteps.get(idGroup).getIngredients());
 
         return c;
 
