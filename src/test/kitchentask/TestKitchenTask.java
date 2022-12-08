@@ -35,7 +35,7 @@ public class TestKitchenTask {
             System.out.println("Foglio autogenerato per servizio \"" + service.getName() + "\" associato all'evento \"" + event.getName() + "\": " + sheet);
 
             System.out.println("\nTEST ADD KITCHEN TASK");
-            List<Procedure> recipes = CatERing.getInstance().getInstructionManager().getInstructions();
+            List<Procedure> recipes = CatERing.getInstance().getProcedureManager().getProcedures();
 
             KitchenTask task1 = catERing.getKitchenTaskManager().addKitchenTask(recipes.get(10));
             KitchenTask task2 = catERing.getKitchenTaskManager().addKitchenTask(recipes.get(14));
@@ -56,7 +56,7 @@ public class TestKitchenTask {
             int firstPosition = 0;
             KitchenTask firstTask = sheet.getKitchenTasks().get(firstPosition);
             int newPosition = sheet.getKitchenTasks().size() - 2;
-            System.out.println("Spostiamo il " + firstPosition + " task \"" + firstTask.getInstruction() + "\" in posizione " + newPosition);
+            System.out.println("Spostiamo il " + firstPosition + " task \"" + firstTask.getProcedure() + "\" in posizione " + newPosition);
             catERing.getKitchenTaskManager().moveTask(firstTask, newPosition);
             System.out.println("Foglio con task spostato: " + sheet);
 

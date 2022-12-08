@@ -13,7 +13,7 @@ public class ProcedureManager {
     ArrayList<KitchenTaskEventReceiver> eventReceivers = new ArrayList<>();
 
     public ProcedureManager() {
-        Recipe.loadAllInstructions();
+        Recipe.loadAllProcedures();
     }
 
 
@@ -92,7 +92,7 @@ public class ProcedureManager {
         currentRecipe.deleteRecipe();
     }
 /*
-    public void editProcedure(Instruction instruction) {
+    public void editProcedure(Procedure procedure) {
             currentRecipe.editRecipe();
     }*/
 
@@ -168,8 +168,8 @@ public class ProcedureManager {
         //notifyKitchenSheetCreated(new KitchenSheet("ciao", new ServiceInfo("cio")));
     }
 
-    public ObservableList<Procedure> getInstructions() {
-        return FXCollections.unmodifiableObservableList(Procedure.getAllInstruction());
+    public ObservableList<Procedure> getProcedures() {
+        return FXCollections.unmodifiableObservableList(Procedure.getAllProcedure());
     }
 
     public ObservableList<Recipe> getRecipes() {

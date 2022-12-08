@@ -93,22 +93,22 @@ public abstract class Procedure {
     }
 
 
-    public static ObservableList<Procedure> loadAllInstructions() {
-        String query = "SELECT * FROM Instructions";
+    public static ObservableList<Procedure> loadAllProcedures() {
+        String query = "SELECT * FROM Procedures";
         PersistenceManager.executeQuery(query, new ResultHandler() {
             @Override
             public void handle(ResultSet res) throws SQLException {
                 int id = res.getInt("id");
                 String title = res.getString("title");
-                String instructionType = res.getString("instruction_type");
+                String procedureType = res.getString("procedure_type");
                 if (all.containsKey(id)) {
                     Procedure procedure = all.get(id);
                     procedure.title = title;
                 } else {
                     Procedure procedure;
-                    if(Objects.equals(instructionType, "r")){
+                    if(Objects.equals(procedureType, "r")){
                         procedure = new Recipe(title);
-                    }else if(Objects.equals(instructionType, "p")){
+                    }else if(Objects.equals(procedureType, "p")){
                         procedure = new Preparation(title);
                     }else{
                         throw new IllegalArgumentException();
@@ -129,11 +129,11 @@ public abstract class Procedure {
         return res;
     }
 
-    public static ObservableList<Procedure> getAllInstruction() {
+    public static ObservableList<Procedure> getAllProcedure() {
         return FXCollections.observableArrayList(all.values());
     }
 
-    public static ArrayList<Procedure> getInstructionsOfRecipes(ArrayList<Recipe> recipes) {
+    public static ArrayList<Procedure> getProceduresOfRecipes(ArrayList<Recipe> recipes) {
         ArrayList<Procedure> procedures = new ArrayList<>(recipes);
 
         for (Procedure recipe: recipes){

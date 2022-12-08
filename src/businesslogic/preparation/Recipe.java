@@ -28,7 +28,7 @@ public class Recipe extends Procedure {
         if (all.containsKey(id))
             return (Recipe) all.get(id);
         Recipe rec = new Recipe();
-        String query = "SELECT * FROM Instructions WHERE id = " + id;
+        String query = "SELECT * FROM Procedures WHERE id = " + id;
         PersistenceManager.executeQuery(query, new ResultHandler() {
             @Override
             public void handle(ResultSet rs) throws SQLException {

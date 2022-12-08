@@ -102,7 +102,7 @@ public class KitchenSheet {
     }
 
     public void deleteKitchenTask(KitchenTask kitchenTask) {
-        kitchenTask.getInstruction().removeAssignedTask(kitchenTask);
+        kitchenTask.getProcedure().removeAssignedTask(kitchenTask);
         kitchenTasks.remove(kitchenTask);
     }
 
@@ -110,7 +110,7 @@ public class KitchenSheet {
         kitchenTasks.clear();
         Menu menu = service.getMenu();
         ArrayList<Recipe> recipes = menu.getRecipes();
-        List<Procedure> procedures = Procedure.getInstructionsOfRecipes(recipes);
+        List<Procedure> procedures = Procedure.getProceduresOfRecipes(recipes);
         for (Procedure procedure : procedures) {
             KitchenTask task = new KitchenTask(procedure);
             kitchenTasks.add(task);
@@ -147,7 +147,7 @@ public class KitchenSheet {
         String secInsert = "INSERT INTO catering.KitchenTasks (completed, kitchen_sheet_id, preparation_id, position) VALUES (" +
                 task.isCompleted() + ", " +
                 sheet.getId() + ", " +
-                task.getInstruction().getId() + ", " +
+                task.getProcedure().getId() + ", " +
                 position +
                 ");";
         PersistenceManager.executeUpdate(secInsert);

@@ -33,7 +33,7 @@ public class InsertItemDialog {
     private boolean confirmed;
 
     public void initialize() {
-        recipeCombo.setItems(CatERing.getInstance().getInstructionManager().getRecipes());
+        recipeCombo.setItems(CatERing.getInstance().getProcedureManager().getRecipes());
         confirmed = false;
     }
 

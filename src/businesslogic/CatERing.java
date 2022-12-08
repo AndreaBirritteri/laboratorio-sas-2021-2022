@@ -49,7 +49,7 @@ public class CatERing {
         return menuMgr;
     }
 
-    public ProcedureManager getInstructionManager() {
+    public ProcedureManager getProcedureManager() {
         return procedureManager;
     }
 

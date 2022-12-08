@@ -59,7 +59,7 @@ public class KitchenTask {
         return isCompleted;
     }
 
-    public Procedure getInstruction() {
+    public Procedure getProcedure() {
         return procedure;
     }
 
@@ -104,7 +104,7 @@ public class KitchenTask {
         String query = "INSERT INTO catering.KitchenTasks (completed, kitchen_sheet_id, preparation_id, position) VALUES (" +
                 taskToAdd.isCompleted() + ", " +
                 sheet.getId() + ", " +
-                taskToAdd.getInstruction().getId() + ", " +
+                taskToAdd.getProcedure().getId() + ", " +
                 posInKitchenSheet +
                 ");";
         PersistenceManager.executeUpdate(query);

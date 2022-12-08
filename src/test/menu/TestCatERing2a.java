@@ -19,7 +19,7 @@ public class TestCatERing2a {
             Section primi = CatERing.getInstance().getMenuManager().defineSection("Primi");
             Section secondi = CatERing.getInstance().getMenuManager().defineSection("Secondi");
 
-            ObservableList<Recipe> recipes = CatERing.getInstance().getInstructionManager().getRecipes();
+            ObservableList<Recipe> recipes = CatERing.getInstance().getProcedureManager().getRecipes();
             CatERing.getInstance().getMenuManager().insertItem(recipes.get(0), antipasti);
             CatERing.getInstance().getMenuManager().insertItem(recipes.get(1), antipasti);
             CatERing.getInstance().getMenuManager().insertItem(recipes.get(2), antipasti);

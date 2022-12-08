@@ -25,7 +25,7 @@ public class Dose implements Ingredient {
         this.description = description;
     }
 
-    public static Dose asIngredient(Preparation preparation){
+    public static Dose asDose(Preparation preparation){
         return new Dose(preparation.getTitle(), preparation.getQuantity());
     }
 }
