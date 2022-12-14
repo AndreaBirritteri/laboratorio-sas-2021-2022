@@ -1,4 +1,4 @@
-package businesslogic.preparation;
+package businesslogic.procedure;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

@@ -5,7 +5,7 @@ import businesslogic.UseCaseLogicException;
 import businesslogic.menu.Menu;
 import businesslogic.menu.MenuItem;
 import businesslogic.menu.Section;
-import businesslogic.preparation.Recipe;
+import businesslogic.procedure.Recipe;
 import javafx.collections.ObservableList;
 
 public class TestCatERing4a {

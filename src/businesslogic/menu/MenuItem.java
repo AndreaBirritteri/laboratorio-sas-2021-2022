@@ -1,7 +1,7 @@
 package businesslogic.menu;
 
-import businesslogic.preparation.Procedure;
-import businesslogic.preparation.Recipe;
+import businesslogic.procedure.Procedure;
+import businesslogic.procedure.Recipe;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import persistence.BatchUpdateHandler;

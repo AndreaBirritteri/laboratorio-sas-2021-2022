@@ -1,8 +1,8 @@
 package businesslogic.menu;
 
 import businesslogic.CatERing;
-import businesslogic.preparation.Procedure;
-import businesslogic.preparation.Recipe;
+import businesslogic.procedure.Procedure;
+import businesslogic.procedure.Recipe;
 import businesslogic.user.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

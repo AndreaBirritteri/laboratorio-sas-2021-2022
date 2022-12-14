@@ -7,7 +7,7 @@ import businesslogic.event.EventInfo;
 import businesslogic.event.ServiceInfo;
 import businesslogic.kitchentask.KitchenSheet;
 import businesslogic.kitchentask.KitchenTask;
-import businesslogic.preparation.Procedure;
+import businesslogic.procedure.Procedure;
 import businesslogic.shift.Shift;
 import businesslogic.user.User;
 

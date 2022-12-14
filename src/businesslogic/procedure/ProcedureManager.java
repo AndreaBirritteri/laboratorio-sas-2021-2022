@@ -1,4 +1,4 @@
-package businesslogic.preparation;
+package businesslogic.procedure;
 
 import businesslogic.kitchentask.KitchenSheet;
 import businesslogic.kitchentask.KitchenTask;

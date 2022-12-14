@@ -1,4 +1,4 @@
-package businesslogic.preparation;
+package businesslogic.procedure;
 
 public class Dose implements Ingredient {
     private String quantity;

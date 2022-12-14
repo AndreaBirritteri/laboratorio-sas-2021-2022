@@ -7,7 +7,7 @@ import businesslogic.event.EventInfo;
 import businesslogic.event.ServiceInfo;
 import businesslogic.kitchentask.KitchenSheet;
 import businesslogic.kitchentask.KitchenTask;
-import businesslogic.preparation.Procedure;
+import businesslogic.procedure.Procedure;
 import javafx.collections.ObservableList;
 
 public class TestKitchenTask2b {
@@ -23,7 +23,7 @@ public class TestKitchenTask2b {
 
         try {
             System.out.println("\nTEST CREATE SHEET");
-            KitchenSheet sheet = catERing.getKitchenTaskManager().createKitchenSheet("Primo foglio di prova", event, service);
+            KitchenSheet sheet = catERing.getKitchenTaskManager().createKitchenSheet("Convegno Agile Community", event, service);
             System.out.println("Foglio autogenerato per servizio \"" + service.getName() + "\" associato all'evento \"" + event.getName() + "\": " + sheet);
 
             System.out.println("\nTEST ADD KITCHEN TASK");

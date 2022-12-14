@@ -6,7 +6,7 @@ import businesslogic.event.EventInfo;
 import businesslogic.event.ServiceInfo;
 import businesslogic.menu.Menu;
 import businesslogic.menu.Section;
-import businesslogic.preparation.Recipe;
+import businesslogic.procedure.Recipe;
 import javafx.collections.ObservableList;
 
 import java.util.Arrays;

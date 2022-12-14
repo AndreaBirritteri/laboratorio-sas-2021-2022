@@ -1,8 +1,8 @@
 package businesslogic.kitchentask;
 
 import businesslogic.UseCaseLogicException;
-import businesslogic.preparation.Procedure;
-import businesslogic.preparation.Recipe;
+import businesslogic.procedure.Procedure;
+import businesslogic.procedure.Recipe;
 import businesslogic.shift.Shift;
 import businesslogic.user.Cook;
 import businesslogic.user.User;
@@ -89,7 +89,7 @@ public class KitchenTask {
                 Procedure procedure = Recipe.loadRecipeById(rs.getInt("procedure_id"));
                 KitchenTask task = new KitchenTask(procedure);
                 task.id = rs.getInt("id");
-                task.minutes = rs.getInt("minutes1");
+                task.minutes = rs.getInt("minutes");
                 task.quantity = rs.getInt("quantity");
                 task.isCompleted = rs.getInt("completed") != 0;
                 task.shift = new Shift(rs.getString("shift_when"));
@@ -131,7 +131,7 @@ public class KitchenTask {
     }
 
     public static void assignTask(KitchenTask task) {
-        String assign = "UPDATE catering.KitchenTasks SET minutes1 = '" + task.minutes +
+        String assign = "UPDATE catering.KitchenTasks SET minutes = '" + task.minutes +
                 "', quantity = '" + task.quantity +
                 "', cook_id = " + (task.cook == null ? null : task.cook.getId()) +
                 ", shift_when = '" + (task.shift == null ? null : task.shift.getDatetime()) +
