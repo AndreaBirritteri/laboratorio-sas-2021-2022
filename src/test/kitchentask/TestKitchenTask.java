@@ -21,13 +21,13 @@ public class TestKitchenTask {
             catERing.getUserManager().fakeLogin("Lidia");
             System.out.println(catERing.getUserManager().getCurrentUser());
 
-//        System.out.println("\nTEST GET EVENT BY NAME");
+            System.out.println("\nTEST GET EVENT BY NAME");
             EventInfo event = EventInfo.getEventByName("Compleanno di Manuela");
-//        System.out.println(event);
+            System.out.println(event);
 
-//        System.out.println("\nTEST GET SERVICE BY EVENT ID");
+            System.out.println("\nTEST GET SERVICE BY EVENT ID");
             ServiceInfo service = event.getFirstService();
-//        System.out.println(service);
+            System.out.println(service);
 
 
             System.out.println("\nTEST CREATE SHEET");
@@ -60,7 +60,7 @@ public class TestKitchenTask {
             catERing.getKitchenTaskManager().moveTask(firstTask, newPosition);
             System.out.println("Foglio con task spostato: " + sheet);
 
-            System.out.println("\nTEST GET TURN TABLE");
+            System.out.println("\nTEST GET SHIFT TABLE");
             List<Shift> shiftTable = catERing.getShiftManager().getShiftTable();
             System.out.println("######################################################");
             System.out.println(shiftTable.toString().replace(", ", " "));

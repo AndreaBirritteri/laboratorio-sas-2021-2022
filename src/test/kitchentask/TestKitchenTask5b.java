@@ -13,9 +13,9 @@ public class TestKitchenTask5b {
         System.out.println(catERing.getUserManager().getCurrentUser());
 
         System.out.println("\nTABELLONE DEI TURNI");
-        List<Shift> turnTable = catERing.getShiftManager().getShiftTable();
+        List<Shift> shiftTable = catERing.getShiftManager().getShiftTable();
         System.out.println("######################################################");
-        System.out.println(turnTable.toString().replace(", ", " "));
+        System.out.println(shiftTable.toString().replace(", ", " "));
         System.out.println("######################################################");
 
         System.out.println("\nTEST SET TURN COMPLETENESS");
@@ -25,8 +25,8 @@ public class TestKitchenTask5b {
         catERing.getShiftManager().getShiftTable().get(firstShift).setCompleted(isCompleted);
         System.out.println("Tabellone post modifica: ");
         System.out.println("######################################################");
-        turnTable = catERing.getShiftManager().getShiftTable(); //bisogna rifare la chiamata per ottenere l'aggiornamento fatto dal db
-        System.out.println(turnTable.toString().replace(", ", " "));
+        shiftTable = catERing.getShiftManager().getShiftTable(); //bisogna rifare la chiamata per ottenere l'aggiornamento fatto dal db
+        System.out.println(shiftTable.toString().replace(", ", " "));
         System.out.println("######################################################");
 
     }
