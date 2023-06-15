@@ -35,14 +35,14 @@ public class TestKitchenTask {
             System.out.println("Foglio autogenerato per servizio \"" + service.getName() + "\" associato all'evento \"" + event.getName() + "\": " + sheet);
 
             System.out.println("\nTEST ADD KITCHEN TASK");
-            List<Procedure> recipes = CatERing.getInstance().getProcedureManager().getProcedures();
+            List<Procedure> procedures = CatERing.getInstance().getProcedureManager().getProcedures();
 
-            KitchenTask task1 = catERing.getKitchenTaskManager().addKitchenTask(recipes.get(10));
-            KitchenTask task2 = catERing.getKitchenTaskManager().addKitchenTask(recipes.get(14));
-            KitchenTask task3 = catERing.getKitchenTaskManager().addKitchenTask(recipes.get(3));
-            KitchenTask task4 = catERing.getKitchenTaskManager().addKitchenTask(recipes.get(8));
-            KitchenTask task5 = catERing.getKitchenTaskManager().addKitchenTask(recipes.get(15));
-            KitchenTask task6 = catERing.getKitchenTaskManager().addKitchenTask(recipes.get(11));
+            KitchenTask task1 = catERing.getKitchenTaskManager().addKitchenTask(procedures.get(10));
+            KitchenTask task2 = catERing.getKitchenTaskManager().addKitchenTask(procedures.get(14));
+            KitchenTask task3 = catERing.getKitchenTaskManager().addKitchenTask(procedures.get(3));
+            KitchenTask task4 = catERing.getKitchenTaskManager().addKitchenTask(procedures.get(8));
+            KitchenTask task5 = catERing.getKitchenTaskManager().addKitchenTask(procedures.get(15));
+            KitchenTask task6 = catERing.getKitchenTaskManager().addKitchenTask(procedures.get(11));
             System.out.println("Foglio con nuovi tasks: \"" + task1 + "\", \"" + task2 + "\", \"" + task3 + "\"" + sheet);
 
             System.out.println("\nTEST DELETE KITCHEN TASK");
@@ -66,7 +66,7 @@ public class TestKitchenTask {
             System.out.println(shiftTable.toString().replace(", ", " "));
             System.out.println("######################################################");
 
-            System.out.println("\nTEST ASSIGN VALUES TO FIRST TASK");
+            System.out.println("\nTEST ASSIGN VALUES");
             int marinellaID = 4;
             User cookMarinella = User.loadUserById(marinellaID);
             Shift tuesdayAfternoonShift = new Shift("Giovedi ore 16:00");

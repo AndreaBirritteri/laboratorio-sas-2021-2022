@@ -11,6 +11,7 @@ import businesslogic.user.Cook;
 import persistence.PersistenceManager;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -106,6 +107,11 @@ public class KitchenSheet {
         kitchenTasks.remove(kitchenTask);
     }
 
+    /**
+        Used also when creating the kitchen shit
+        It loads the kitchen tasks based on the menu
+        It copies the menu procedures in the kitchen task
+    */
     public void restoreOriginalTasks() {
         kitchenTasks.clear();
         Menu menu = service.getMenu();
@@ -123,7 +129,7 @@ public class KitchenSheet {
     }
 
     public void assignTask(KitchenTask kitchenTask, Shift shift, Cook cook, int minutes, int quantity) throws UseCaseLogicException {
-        kitchenTasks.get(kitchenTasks.indexOf(kitchenTask)).assign(shift, cook, minutes, quantity);
+        kitchenTasks.get(kitchenTasks.indexOf(kitchenTask))   .assign(shift, cook, minutes, quantity);
     }
 
     public void setKitchenTaskCompleted(KitchenTask kitchenTask, boolean isCompleted) {
